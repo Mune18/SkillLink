@@ -1,135 +1,130 @@
 body {
-    background: #f5fafe;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background: #fff;
-    box-shadow: 0px 0px 5px;
-  }
-  
-  header img {
-    
-  }
-  
-  header nav {
-    display: flex;
-    gap: 20px;
-  }
-  
-  header a {
-    text-decoration: none;
-    padding: 8px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #007bff;
-    border: 1px solid #007bff;
-  }
-  
-  header a:hover {
-    background: #007bff;
-    color: white;
-  }
-  
-  .container {
-    text-align: center;
-    padding: 40px;
-  }
-  
-  .container h1 {
-    font-size: 50px;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    margin-left: 30px;
-    text-align: left;
-    font-weight: 900;
-  }
-  
-  .form-container {
-    background: white;
-    max-width: 400px;
-    margin-top: 80px;
-    margin-left: 70px;
-    padding: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-  }
-  
-  .form-container h2 {
-    margin-bottom: 20px;
-    font-size: 30px;
-    color: #333;
-  }
-  
-  .form-container label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .form-container input {
-    width: 95%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .form-container a {
-    font-size: 13px;
-    color: #007bff;
-    text-decoration: none;
-    float: right;
-    margin-bottom: 10px;
-  }
+  background: #f5fafe;
+}
 
-  .form-container .register-links a {
-    font-size: 13px;
-    color: #007bff;
-    text-decoration: none;
-    float: inherit;
-    margin-bottom: 10px;
-  }
-  
-  .form-container button {
-    width: 100%;
-    padding: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .form-container button:hover {
-    background: #0056b3;
-  }
-  
-  .register-links {
-    margin-top: 20px;
-    font-size: 14px;
-    text-align: left;
-  }
-  
-  .register-links a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .image-container {
-    margin-top: 30px;
-  }
-  
-  .image-container img {
-    width: 100%;
-    max-width: 600px;
-    border-radius: 5px;
-  }
-  
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #fff;
+  box-shadow: 0px 0px 5px;
+}
+
+header nav {
+  display: flex;
+  gap: 20px;
+}
+
+header a {
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+header a:hover {
+  background: #007bff;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  padding: 40px;
+}
+
+.container h1 {
+  font-size: 50px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  margin-left: 30px;
+  text-align: left;
+  font-weight: 900;
+}
+
+.form-container {
+  background: white;
+  max-width: 400px;
+  margin-top: 80px;
+  margin-left: 70px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  font-size: 30px;
+  color: #333;
+}
+
+.form-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-container input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-container a {
+  font-size: 13px;
+  color: #007bff;
+  text-decoration: none;
+  float: right;
+  margin-bottom: 10px;
+}
+
+.form-container .register-links a {
+  font-size: 13px;
+  color: #007bff;
+  text-decoration: none;
+  float: inherit;
+  margin-bottom: 10px;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background: #0056b3;
+}
+
+.register-links {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.register-links a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.image-container {
+  margin-top: 30px;
+}
+
+.image-container img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 5px;
+}
