@@ -5,8 +5,8 @@
       <img src="assets/images/skill-high-resolution-logo.png" alt="SkillLink Logo" class="logo-image" />
     </div>
     <nav class="nav">
-      <a href="#">Home</a>
-      <a href="#">My Posts</a>
+      <a href="/home">Home</a>
+      <a href="/posts">My Posts</a>
     </nav>
     <div class="search-bar">
       <input type="text" placeholder="Search" class="search-input" />
@@ -41,6 +41,28 @@
 
     <!-- Posts Section -->
     <section class="posts-section">
+      <mat-card class="post-input-card">
+        <div class="post-input-header">
+          <div class="post-avatar"></div>
+          <input
+            type="text"
+            class="post-input"
+            placeholder="Create a post"
+          />
+        </div>
+        <div class="post-options">
+          <button class="post-option">
+            <mat-icon class="video-icon">video_library</mat-icon>
+            Video
+          </button>
+          <button class="post-option">
+            <mat-icon class="photo-icon">photo</mat-icon>
+            Photo
+          </button>
+          
+        </div>
+      </mat-card>
+  
       <mat-card class="post-card">
         <div class="post-header">
           <div class="post-avatar"></div>
@@ -68,4 +90,43 @@
       </mat-card>
     </section>
   </div>
+  <div *ngIf="isMessagingOpen" class="messaging-sidebar">
+    <div class="messaging-header">
+      <h3>Messaging</h3>
+      <button class="close-messaging" (click)="toggleMessaging()">×</button>
+    </div>
+    <div class="connection-list">
+      <div class="connection" (click)="openChat('John Doe')">
+        <div class="connection-avatar"></div>
+        <span class="connection-name">John Doe</span>
+      </div>
+      <div class="connection" (click)="openChat('Jane Smith')">
+        <div class="connection-avatar"></div>
+        <span class="connection-name">Jane Smith</span>
+      </div>
+    </div>
+    <div class="chat-window">
+      <div class="chat-header">
+        <span id="chat-with">Chat with:</span>
+      </div>
+      <div class="chat-messages">
+        <!-- Chat messages will be dynamically added here -->
+      </div>
+      <div class="chat-input-container">
+        <input
+          type="text"
+          class="chat-input"
+          placeholder="Type a message..."
+          (keyup.enter)="sendMessage()"
+        />
+        <button class="send-message" (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add a button or trigger to reopen the messaging sidebar -->
+  <button class="messaging-toggle" *ngIf="!isMessagingOpen" (click)="toggleMessaging()">
+    <mat-icon>message</mat-icon>
+  </button>  
+  
 </div>
