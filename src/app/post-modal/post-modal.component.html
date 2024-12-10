@@ -1,0 +1,37 @@
+<mat-dialog-content>
+    <!-- Profile Section -->
+    <div class="profile">
+      <mat-icon class="avatar">account_circle</mat-icon>
+      <div class="profile-info">
+        <span class="username">Rodge Romer Muni</span>
+        <mat-select placeholder="Post to" class="post-select" [(ngModel)]="postTo">
+          <mat-option value="Public">Post to Public</mat-option>
+          <mat-option value="Connected">Post to Connected</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  
+    <!-- Text Input Area -->
+    <div class="input-area">
+      <label>What do you want to talk about?</label>
+      <textarea [(ngModel)]="postContent" placeholder="Write something..."></textarea>
+    </div>
+  
+    <!-- Actions & Attachments -->
+    <div class="post-options">
+        <button class="post-option">
+          <mat-icon class="video-icon">video_library</mat-icon>
+          Video
+        </button>
+        <button class="post-option">
+          <mat-icon class="photo-icon">photo</mat-icon>
+          Photo
+        </button>
+      </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-button color="primary" (click)="submitPost()">Post</button>
+  </mat-dialog-actions>
+  

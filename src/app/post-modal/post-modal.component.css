@@ -1,0 +1,93 @@
+/* Profile Section */
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile .avatar {
+    font-size: 40px;
+    margin-right: 10px;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .username {
+    font-weight: bold;
+    color: black;
+  }
+  
+  .post-select {
+    width: 150px;
+  }
+  
+  /* Text Input Area */
+  .input-area {
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    width: 96%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    margin-top: 20px;
+  }
+  
+  /* Actions */
+  .actions {
+  }
+  
+  button.mat-icon-button {
+    color: #555;
+  }
+  
+  button.mat-button {
+    margin-top: 10px;
+  }
+
+  .mat-mdc-dialog-actions {
+    padding: var(--mat-dialog-actions-padding, 8px);
+    justify-content: var(--mat-dialog-actions-alignment, start);
+    margin-top: -20px;
+}
+  
+.post-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .post-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .post-option:hover {
+    background-color: #f0f0f0;
+    color: #000;
+  }
+  
+  .video-icon {
+    color: #4caf50; /* Green for Video */
+  }
+  
+  .photo-icon {
+    color: #2196f3; /* Blue for Photo */
+  }
