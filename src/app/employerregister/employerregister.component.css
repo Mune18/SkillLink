@@ -1,0 +1,164 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #f5fafe;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; /* Limit body height to viewport */
+    overflow: hidden; /* Disable scrolling */
+  }
+  
+  /* Top Navigation Bar */
+  .topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 40px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .topnav .back-arrow {
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .topnav .back-arrow:hover {
+    text-decoration: underline;
+  }
+  
+  .topnav .logo {
+    height: 30px;
+  }
+  
+  /* Main Content */
+  .container {
+    display: flex;
+    align-items: flex-start; /* Align items to the top of the container */
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1600px;
+    margin-top: 15vh; /* Decrease the top margin */
+    gap: 50px;
+}
+  
+  .content h1 {
+    font-size: 3rem; /* Increase font size for the main heading */
+    line-height: 1.5; /* Adjust line height for better spacing */
+    margin-bottom: 0px;
+}
+  
+  .highlight {
+    color: #34c3f3;
+  }
+  
+  .content p {
+    font-size: 1.25rem; /* Increase font size for the subheading */
+    color: #555;
+    margin-bottom: 40px; /* Add space between the text and the form */
+}
+  
+  /* Form Container */
+  .form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .form-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #34c3f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .form-container button:hover {
+    background-color: #2aa8d0;
+  }
+  
+  .login-link {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .login-link a {
+    color: #34c3f3;
+    text-decoration: none;
+  }
+
+  /* Background Image Styles */
+
+/* Bottom-left logo */
+.logo-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    opacity: 0.2;  /* Low opacity for subtle appearance */
+    z-index: 1; /* Keeps the logo behind the form */
+  }
+  
+  .logo-container img {
+    width: 1000px;
+    margin-bottom: -25px;
+    margin-left: -19px;
+    height: auto;
+  }
+  
+  /* Bottom-right image */
+  .image-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1; /* Keeps the image behind the form */
+  }
+  
+  .image-container img {
+    width: 1000px; /* Larger size */
+    height: auto;
+    max-width: none;
+    margin-bottom: -5px;
+  }
+  

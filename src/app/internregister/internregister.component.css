@@ -1,132 +1,193 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f5fafe;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5fafe;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Top Navigation Bar */
+.topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 101%;
+  padding: 20px 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topnav .back-arrow {
+  font-size: 1.5rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.topnav .back-arrow:hover {
+  text-decoration: underline;
+}
+
+.topnav img {
+  height: auto;
+}
+
+/* Main Content */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1530px;
+  margin-top: 100px; /* Add space for fixed navigation */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Registration Form */
+.form-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  z-index: 2;
+  position: relative;
+}
+
+.form-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #34c3f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #2aa8d0;
+}
+
+.login-link {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login-link a {
+  color: #34c3f3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.right-section h1 {
+  position: fixed;
+    top: 13%;
+    right: 200px;
+    font-size: 70px;
+    font-weight: 900;
     color: #333;
-    display: flex;
+    z-index: 2;
+    text-align: left;
+    line-height: 1.4;
+    padding-right: 30px;
+}
+
+/* Decorative Elements */
+.logo-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  opacity: 0.2;  /* Low opacity for subtle appearance */
+  z-index: 1; /* Keeps the logo behind the form */
+}
+
+.logo-container img {
+  width: 1000px;
+  margin-bottom: -25px;
+  margin-left: -19px;
+  height: auto;
+}
+
+.image-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1; /* Keeps the image behind the form */
+}
+
+.image-container img {
+  width: 1000px; /* Larger size */
+  height: auto;
+  max-width: none;
+  margin-bottom: -5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    gap: 20px;
   }
-  
-  /* Top Navigation Bar */
-  .topnav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+  .form-container {
+    width: 90%;
+    max-width: 360px;
+  }
+
+  .image-container img {
     width: 100%;
-    padding: 20px 40px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    position: fixed;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .topnav .back-arrow {
-    font-size: 1rem;
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .topnav .back-arrow:hover {
-    text-decoration: underline;
-  }
-  
-  .topnav .logo {
-    height: 30px;
-  }
-  
-  /* Main Content */
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    max-width: 1200px;
-    margin-top: 20vh; /* Space for the fixed topnav */
-    gap: 50px;
-  }
-  
-  .content {
     max-width: 500px;
   }
-  
-  .content h1 {
-    font-size: 2.5rem;
-    line-height: 1.4;
+
+  .logo-container img {
+    width: 80%;
+    max-width: 500px;
   }
-  
-  .highlight {
-    color: #34c3f3;
+
+  .right-section {
+    font-size: 2.5rem; /* Reduce font size for smaller screens */
+    top: 20%;
   }
-  
-  .content p {
-    font-size: 1rem;
-    margin-top: 10px;
-    color: #555;
-  }
-  
-  /* Form Container */
-  .form-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-  }
-  
-  .form-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .form-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  .form-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  .form-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #34c3f3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .form-container button:hover {
-    background-color: #2aa8d0;
-  }
-  
-  .login-link {
-    margin-top: 15px;
-    text-align: center;
-  }
-  
-  .login-link a {
-    color: #34c3f3;
-    text-decoration: none;
-  }
-  
+}
