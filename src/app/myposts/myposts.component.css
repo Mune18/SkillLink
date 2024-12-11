@@ -20,6 +20,11 @@ body {
     background-color: #ffffff;
     padding: 15px 40px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 96%;
+    z-index: 1000;
   }
   
   .logo {
@@ -145,6 +150,7 @@ body {
     display: flex;
     padding: 20px 40px;
     gap: 13vh;
+    margin-top: 8vh;
   }
   
   .profile-sidebar {
@@ -531,6 +537,16 @@ body {
   
   .send-message:hover {
     background-color: #005b94;
+  }
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .post-menu {
+    margin-left: auto;
   }
   
   
