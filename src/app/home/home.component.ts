@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,10 @@ export class HomeComponent {
   ];
 
   isDropdownOpen = false;
+  
+    // Inject MatDialog into the constructor
+  constructor(private dialog: MatDialog, private router: Router) {}
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
@@ -60,9 +65,6 @@ export class HomeComponent {
     }
   }
 
-  // Inject MatDialog into the constructor
-  constructor(private dialog: MatDialog) {}
-
   openPostModal(): void {
     const dialogRef = this.dialog.open(PostModalComponent, {
       width: '600px',
@@ -74,5 +76,15 @@ export class HomeComponent {
         console.log('Post created:', result);
       }
     });
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+    this.isDropdownOpen = false; // Close the dropdown after navigating
+  }
+
+  Logout() {
+    this.router.navigate(['/login']);
+    this.isDropdownOpen = false; // Close the dropdown after navigating
   }
 }

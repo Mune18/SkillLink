@@ -1,0 +1,250 @@
+
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 15px 40px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 96%;
+    z-index: 1000;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-image {
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav a:hover {
+    color: #0073b1;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    padding: 5px 15px;
+    margin-right: 45vh;
+    margin-left: 30vh;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    width: 350px;
+    font-size: 14px;
+    background-color: transparent;
+    margin-left: 10px;
+  }
+  
+  .search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .search-button mat-icon {
+    color: #0073b1;
+  }
+  
+  /* Profile Section */
+  .profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .profile span {
+    font-size: 14px;
+    margin-right: 10px;
+    font-weight: 500;
+  }
+  
+  .profile > mat-icon {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  .profile:hover > mat-icon {
+    transform: rotate(180deg);
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 200px;
+  }
+  
+  .dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dropdown-menu li {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #f0f2f5;
+  }
+  
+  .dropdown-menu mat-icon {
+    color: #0073b1;
+  }
+  
+  /* Show dropdown when active */
+  .profile.active .dropdown-menu {
+    display: block;
+  }
+
+.profile-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 10vh;
+}
+
+.profile-header {
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.profile-picture {
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin-right: 24px;
+}
+
+.profile-info h2 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.profile-info p {
+  margin: 0 0 12px 0;
+  color: #666;
+}
+
+.contact-info {
+  color: #4ECDC4;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.section {
+  padding: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.section-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.add-button, .edit-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 16px;
+}
+
+.add-button:hover, .edit-button:hover {
+  color: #4ECDC4;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill {
+  background: #f5f5f5;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  color: #333;
+}
+
+.education-item, .experience-item {
+  margin-bottom: 16px;
+}
+
+.education-item h4, .experience-item h4 {
+  margin: 0 0 4px 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.education-item p, .experience-item p {
+  margin: 0 0 4px 0;
+  color: #666;
+}
+
+.date {
+  font-size: 14px;
+  color: #888;
+}
+
+.location {
+  color: #666;
+  font-size: 14px;
+}

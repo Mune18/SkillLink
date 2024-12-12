@@ -19,8 +19,8 @@
       <mat-icon>keyboard_arrow_down</mat-icon>
       <div class="dropdown-menu" *ngIf="isDropdownOpen">
         <ul>
-          <li><mat-icon>person</mat-icon>Profile</li>
-          <li><mat-icon>logout</mat-icon>Log Out</li>
+          <li (click)="goToProfile()"><mat-icon>person</mat-icon>Profile</li>
+          <li (click)="Logout()"><mat-icon>logout</mat-icon>Log Out</li>
         </ul>
       </div>
     </div>
@@ -144,6 +144,6 @@
 
   <!-- Button to reopen messaging sidebar -->
   <button class="messaging-toggle" *ngIf="!isMessagingOpen" (click)="toggleMessaging()">
-    Messages
-  </button>
+    <mat-icon>message</mat-icon>
+  </button>  
 </div>

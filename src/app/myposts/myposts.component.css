@@ -437,18 +437,26 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #0073b1;
+    background-color: #0073b1; /* Icon button color */
     color: white;
     border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
+    width: 50px; /* Circle diameter */
+    height: 50px;
+    border-radius: 50%; /* Make it circular */
     cursor: pointer;
-    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-size: 24px; /* Icon size */
   }
   
   .messaging-toggle:hover {
-    background-color: #005b94;
+    background-color: #005b94; /* Hover effect */
+  }
+  
+  .messaging-toggle mat-icon {
+    font-size: 24px; /* Icon size */
   }
   
   .connection-list {
