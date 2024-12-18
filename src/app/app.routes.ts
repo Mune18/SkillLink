@@ -5,6 +5,7 @@ import { MypostsComponent } from './myposts/myposts.component';
 import { InternregisterComponent } from './internregister/internregister.component';
 import { EmployerregisterComponent } from './employerregister/employerregister.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'intern', component: InternregisterComponent },
     { path: 'employer', component: EmployerregisterComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'userprofile', component: UserprofileComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

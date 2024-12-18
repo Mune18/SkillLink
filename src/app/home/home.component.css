@@ -149,14 +149,14 @@ body {
 .content {
   display: flex;
   padding: 20px 40px;
-  gap: 13vh;
+  gap: 5vh;
   margin-top: 8vh;
+  margin-left: 20vh;
 }
 
 .profile-sidebar {
   display: flex;
   justify-content: center; /* Centers the card */
-  width: 25%;
 }
 
 /* Profile Card Styles */
@@ -211,10 +211,6 @@ body {
   font-size: 14px;
   color: #555;
   margin-top: -10px;
-}
-
-.posts-section {
-  flex: 1;
 }
 
 /* Updated Post Card Styles */
@@ -545,6 +541,114 @@ body {
 
 .send-message:hover {
   background-color: #005b94;
+}
+
+/* Feed Card Container */
+.feed-card {
+  width: 350px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  height: fit-content;
+}
+
+/* Title */
+.feed-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Feed Item */
+.feed-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+  position: relative;
+}
+
+.feed-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.feed-info {
+  flex: 1;
+}
+
+.feed-name {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  display: block;
+}
+
+.feed-description {
+  font-size: 12px;
+  color: #666;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Follow Button */
+.follow-btn {
+  background-color: white;
+  color: #0a66c2;
+  border: 1px solid #0a66c2;
+  border-radius: 15px;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.follow-btn:hover {
+  background-color: #eaf4ff;
+}
+
+/* View All Recommendations Link */
+.view-recommendations {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #0a66c2;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.view-recommendations:hover {
+  text-decoration: underline;
+}
+
+/* Follow Button Styling */
+/* Follow Button for Postcard */
+.postcard-follow-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #0073b1;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.postcard-follow-btn:hover {
+  background-color: #005582;
+  transform: scale(1.05);
 }
 
 

@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     CommonModule,
-    PostModalComponent,
     MatDialogModule,
     MatMenuModule,
   ],

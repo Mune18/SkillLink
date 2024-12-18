@@ -270,30 +270,6 @@ p {
   color: #666;
 }
 
-.edit-icon {
-  position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding-bottom: 0px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.edit-icon mat-icon {
-  font-size: 18px;
-    padding-inline-start: 8px;
-    padding-top: 6px;
-    color: #6a11cb;
-}
-
-.edit-icon:hover {
-  background-color: #f0f0f0;
-}
-
 .activity-section h5 {
   font-size: 13px;
   margin-bottom: 10px;
@@ -382,40 +358,23 @@ p {
   margin-top: 10px;
 }
 
-/* Create Post Button Styling */
-.create-post-btn {
+/* Follow Button for Postcard */
+.follow-btn {
   position: absolute;
-  align-content: center;
-  top: 12px;
-  right: 80px;
+  top: 165px;
+  right: 29px;
   background-color: #0073b1;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
+  color: white;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.create-post-btn mat-icon {
-  font-size: 18px;
-}
-
-.create-post-btn:hover {
-  background-color: #005f8d;
-}
-
-.edit-icon {
-  position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding-bottom: 0px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.follow-btn:hover {
+  background-color: #005582;
+  transform: scale(1.05);
 }

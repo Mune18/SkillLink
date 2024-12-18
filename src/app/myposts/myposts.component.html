@@ -2,7 +2,7 @@
   <!-- Header -->
   <header class="header">
     <div class="logo">
-      <img src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto" />
+      <img src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
     </div>
     <nav class="nav">
       <a href="/home">Home</a>
@@ -23,7 +23,7 @@
           <li (click)="Logout()"><mat-icon>logout</mat-icon>Log Out</li>
         </ul>
       </div>
-    </div>
+    </div>    
   </header>
 
   <!-- Content Section -->
@@ -52,15 +52,18 @@
           />
         </div>
         <div class="post-options">
+          <!-- <button class="post-option">
+            <mat-icon class="video-icon">video_library</mat-icon>
+            Video
+          </button> -->
           <button class="post-option">
             <mat-icon class="photo-icon">photo</mat-icon>
             Photo
           </button>
         </div>
       </mat-card>
-
-      <!-- Iterate over posts array -->
-      <mat-card class="post-card" *ngFor="let post of posts">
+  
+      <mat-card class="post-card">
         <div class="post-header">
           <div class="post-avatar"></div>
           <div>
@@ -68,31 +71,38 @@
             <p>Student at Gordon College, Olongapo City</p>
             <p class="post-time">3 Days Ago</p>
           </div>
-          <div class="post-menu">
-            <button
-              mat-icon-button
-              [matMenuTriggerFor]="postMenu"
-              aria-label="Post options"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #postMenu="matMenu">
-              <button mat-menu-item (click)="editPost(post.id)">
-                <mat-icon>edit</mat-icon>
-                Edit
-              </button>
-              <button mat-menu-item (click)="deletePost(post.id)">
-                <mat-icon>delete</mat-icon>
-                Delete
-              </button>
-            </mat-menu>
+        </div>
+        <p class="post-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...
+        </p>
+        <div class="post-image-container">
+          <img src="path-to-image.jpg" alt="Post Image" class="post-image" />
+        </div>
+        <div class="post-stats">
+          <span><mat-icon>thumb_up</mat-icon> 12,349 Reacts</span>
+          <span><mat-icon>comment</mat-icon> 367 Comments</span>
+        </div>
+        <div class="post-actions">
+          <button><mat-icon>thumb_up</mat-icon> Like</button>
+          <button><mat-icon>comment</mat-icon> Comment</button>
+          <button><mat-icon>share</mat-icon> Share</button>
+        </div>
+      </mat-card>
+
+      <mat-card class="post-card">
+        <div class="post-header">
+          <div class="post-avatar"></div>
+          <div>
+            <h3>Rodge Romer Muni</h3>
+            <p>Student at Gordon College, Olongapo City</p>
+            <p class="post-time">3 Days Ago</p>
           </div>
         </div>
         <p class="post-text">
-          {{ post.content }}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...
         </p>
-        <div class="post-image-container" *ngIf="post.image">
-          <img [src]="post.image" alt="Post Image" class="post-image" />
+        <div class="post-image-container">
+          <img src="path-to-image.jpg" alt="Post Image" class="post-image" />
         </div>
         <div class="post-stats">
           <span><mat-icon>thumb_up</mat-icon> 12,349 Reacts</span>
@@ -105,9 +115,46 @@
         </div>
       </mat-card>
     </section>
+
+    <!-- Add to Your Feed Card -->
+<div class="feed-card">
+  <h3 class="feed-title">Add to your feed</h3>
+
+  <!-- Feed Item 1 -->
+  <div class="feed-item">
+    <img src="work-from-home-logo.png" alt="Work from Home Logo" class="feed-avatar">
+    <div class="feed-info">
+      <span class="feed-name">Work from Home / Remote Jobs</span>
+      <span class="feed-description">Company • Human Resources Services</span>
+    </div>
+    <button class="follow-btn">+ Follow</button>
   </div>
 
-  <!-- Messaging Sidebar -->
+  <!-- Feed Item 2 -->
+  <div class="feed-item">
+    <img src="bill-gates.jpg" alt="Bill Gates" class="feed-avatar">
+    <div class="feed-info">
+      <span class="feed-name">Bill Gates</span>
+      <span class="feed-description">Chair, Gates Foundation and Founder, Breakthrough Energy</span>
+    </div>
+    <button class="follow-btn">+ Follow</button>
+  </div>
+
+  <!-- Feed Item 3 -->
+  <div class="feed-item">
+    <img src="marge-aviso.jpg" alt="Marge Aviso" class="feed-avatar">
+    <div class="feed-info">
+      <span class="feed-name">Marge Aviso</span>
+      <span class="feed-description">CEO | Helping You Build Top 5% Talented Teams & VAs in the Philippines</span>
+    </div>
+    <button class="follow-btn">+ Follow</button>
+  </div>
+
+  <!-- Bottom View Link -->
+  <a href="#" class="view-recommendations">View all recommendations →</a>
+</div>
+
+  </div>
   <div *ngIf="isMessagingOpen" class="messaging-sidebar">
     <div class="messaging-header">
       <h3>Messaging</h3>
@@ -141,9 +188,10 @@
       </div>
     </div>
   </div>
-
-  <!-- Button to reopen messaging sidebar -->
+  
+  <!-- Add a button or trigger to reopen the messaging sidebar -->
   <button class="messaging-toggle" *ngIf="!isMessagingOpen" (click)="toggleMessaging()">
     <mat-icon>message</mat-icon>
   </button>  
+  
 </div>

@@ -64,6 +64,7 @@
       </mat-card>
   
       <mat-card class="post-card">
+        <button class="follow-btn">+ Follow</button>
         <div class="post-header">
           <div class="post-avatar"></div>
           <div>
@@ -90,6 +91,7 @@
       </mat-card>
 
       <mat-card class="post-card">
+        <button class="postcard-follow-btn">+ Follow</button>
         <div class="post-header">
           <div class="post-avatar"></div>
           <div>
@@ -115,6 +117,45 @@
         </div>
       </mat-card>
     </section>
+
+    <!-- Add to Your Feed Card -->
+<div class="feed-card">
+  <h3 class="feed-title">Add to your feed</h3>
+
+  <!-- Feed Item 1 -->
+  <div class="feed-item">
+    <img src="work-from-home-logo.png" alt="Work from Home Logo" class="feed-avatar">
+    <div class="feed-info">
+      <span class="feed-name">Work from Home / Remote Jobs</span>
+      <span class="feed-description">Company • Human Resources Services</span>
+    </div>
+    <button class="follow-btn">+ Follow</button>
+  </div>
+
+  <!-- Feed Item 2 -->
+  <div class="feed-item">
+    <img src="bill-gates.jpg" alt="Bill Gates" class="feed-avatar">
+    <div class="feed-info">
+      <span class="feed-name">Bill Gates</span>
+      <span class="feed-description">Chair, Gates Foundation and Founder, Breakthrough Energy</span>
+    </div>
+    <button class="follow-btn">+ Follow</button>
+  </div>
+
+  <!-- Feed Item 3 -->
+  <div class="feed-item">
+    <img src="marge-aviso.jpg" alt="Marge Aviso" class="feed-avatar">
+    <div class="feed-info">
+      <span class="feed-name">Marge Aviso</span>
+      <span class="feed-description">CEO | Helping You Build Top 5% Talented Teams & VAs in the Philippines</span>
+    </div>
+    <button class="follow-btn">+ Follow</button>
+  </div>
+
+  <!-- Bottom View Link -->
+  <a href="#" class="view-recommendations">View all recommendations →</a>
+</div>
+
   </div>
   <div *ngIf="isMessagingOpen" class="messaging-sidebar">
     <div class="messaging-header">
