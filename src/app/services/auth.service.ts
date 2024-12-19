@@ -79,7 +79,10 @@ InternOrRecruiter(role: string) {
     const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
     return this.http.post<any>(`${this.apiUrl}/forum`, data, { headers });
 }
-
+getMyForum(): Observable<any> {
+  const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+  return this.http.get<any>(`${this.apiUrl}/getmyforum`, { headers });
+}
 
   registerIntern(user: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

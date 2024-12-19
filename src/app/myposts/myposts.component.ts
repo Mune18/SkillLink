@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,6 +7,8 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-myposts',
@@ -22,16 +24,35 @@ import { Router } from '@angular/router';
   templateUrl: './myposts.component.html',
   styleUrls: ['./myposts.component.css'],
 })
-export class MypostsComponent {
-  posts = [
-    { id: '1', content: 'Lorem ipsum dolor sit amet...', image: 'assets/post-image.png' },
-    { id: '2', content: 'Another sample post content...', image: 'assets/post-image.png' },
-  ];
+export class MypostsComponent implements OnInit {
+  forums: any = {}
 
   isDropdownOpen = false;
 
   // Inject MatDialog into the constructor
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(private dialog: MatDialog, private router: Router, private authService: AuthService) {
+
+
+  }
+
+  ngOnInit(): void {
+    this.getMyPost()
+  }
+
+
+  getMyPost() {
+    this.authService.getMyForum().subscribe(
+      (data) => {
+        console.log("data", data)
+        this.forums = data; // Store the retrieved forums data
+        console.log('Retrieved forums:', this.forums);
+      },
+      (error) => {
+        console.error('Error retrieving forums:', error);
+      }
+    );
+  }
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
