@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
     { content: 'Lorem ipsum dolor sit amet...', image: 'assets/post-image.png' },
     { content: 'Another sample post content...', image: 'assets/post-image.png' },
   ];
-
-  userData: any = null;
+  userProfileImage: string = '';
+  userData: any = {};
   isDropdownOpen = false;
 
     // Inject MatDialog into the constructor
@@ -48,8 +48,10 @@ export class HomeComponent implements OnInit {
     if (userId) {
       this.authService.getMyData(+userId).subscribe({
         next: (response) => {
+          this.userData = response.user;
           console.log('User data fetched successfully:', response);
-          this.userData = response;
+          console.log("my data:", this.userData)
+          this.userProfileImage = `${this.authService.apiUrl}${this.userData.profile_image}`;
         },
         error: (error) => {
           console.error('Failed to fetch user data:', error);

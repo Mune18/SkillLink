@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,9 +20,39 @@ import { Router } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
+  userData: any = {};
+  constructor(private dialog: MatDialog, private router: Router,  private authService: AuthService) {}
 
-  constructor(private dialog: MatDialog, private router: Router) {}
+  ngOnInit(): void {
+    // const userId = this.getLoggedInUserId();
+    this.fetchUserData();
+  }
+
+
+  
+  fetchUserData(): void {
+    const userId = this.authService.getID();
+    if (userId) {
+      this.authService.getMyData(+userId).subscribe({
+        next: (response) => {
+          this.userData = response.user;
+          console.log('User data fetched successfully:', response);
+          console.log("my data:", this.userData)
+          // this.userProfileImage = `${this.authService.apiUrl}${this.userData.profile_image}`;
+        },
+        error: (error) => {
+          console.error('Failed to fetch user data:', error);
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
+        },
+      });
+    } else {
+      console.error('No user ID found in local storage.');
+      this.router.navigate(['/login']);
+    }
+  }
 
   isDropdownOpen = false;
   toggleDropdown() {

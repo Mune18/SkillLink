@@ -12,17 +12,17 @@
     width: 96%;
     z-index: 1000;
   }
-  
+
   .logo {
     display: flex;
     align-items: center;
   }
-  
+
   .logo-image {
     height: auto;
     margin-right: 10px;
   }
-  
+
   .nav a {
     margin: 0 15px;
     text-decoration: none;
@@ -31,11 +31,11 @@
     font-size: 15px;
     transition: color 0.3s ease;
   }
-  
+
   .nav a:hover {
     color: #0073b1;
   }
-  
+
   .search-bar {
     display: flex;
     align-items: center;
@@ -45,7 +45,7 @@
     margin-right: 45vh;
     margin-left: 30vh;
   }
-  
+
   .search-input {
     border: none;
     outline: none;
@@ -54,17 +54,17 @@
     background-color: transparent;
     margin-left: 10px;
   }
-  
+
   .search-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
   }
-  
+
   .search-button mat-icon {
     color: #0073b1;
   }
-  
+
   /* Profile Section */
   .profile {
     display: flex;
@@ -72,22 +72,22 @@
     position: relative;
     cursor: pointer;
   }
-  
+
   .profile span {
     font-size: 14px;
     margin-right: 10px;
     font-weight: 500;
   }
-  
+
   .profile > mat-icon {
     margin-left: 5px;
     transition: transform 0.3s ease;
   }
-  
+
   .profile:hover > mat-icon {
     transform: rotate(180deg);
   }
-  
+
   /* Dropdown Menu */
   .dropdown-menu {
     display: none;
@@ -100,13 +100,13 @@
     z-index: 1000;
     width: 200px;
   }
-  
+
   .dropdown-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  
+
   .dropdown-menu li {
     padding: 10px 15px;
     font-size: 14px;
@@ -117,15 +117,15 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+
   .dropdown-menu li:hover {
     background-color: #f0f2f5;
   }
-  
+
   .dropdown-menu mat-icon {
     color: #0073b1;
   }
-  
+
   /* Show dropdown when active */
   .profile.active .dropdown-menu {
     display: block;
@@ -419,3 +419,5 @@ p {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
+

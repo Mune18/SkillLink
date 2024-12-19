@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  apiUrl = 'http://127.0.0.1:8000/api';
+  public apiUrl = 'http://127.0.0.1:8000/api';
 
 
 
@@ -24,6 +24,8 @@ export class AuthService {
     localStorage.setItem('role', role);
     localStorage.setItem('id', id);
   }
+
+
 
   /**
    * Retrieve the access token from localStorage
@@ -73,6 +75,10 @@ InternOrRecruiter(role: string) {
     return this.http.get<any>(`${this.apiUrl}/mydata/${id}`, { headers });
   }
 
+  createForum(data: any): Observable<any> {
+    const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+    return this.http.post<any>(`${this.apiUrl}/forum`, data, { headers });
+}
 
 
   registerIntern(user: any): Observable<any> {

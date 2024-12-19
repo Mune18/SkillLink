@@ -13,7 +13,7 @@
       </button>
     </div>
     <div class="profile" (click)="toggleDropdown()" [class.active]="isDropdownOpen">
-      <span>Rodge Romer Muni</span>
+      <span>{{userData.fullname}}</span>
       <mat-icon>keyboard_arrow_down</mat-icon>
       <div class="dropdown-menu" *ngIf="isDropdownOpen">
         <ul>
@@ -21,7 +21,7 @@
           <li (click)="Logout()"><mat-icon>logout</mat-icon>Log Out</li>
         </ul>
       </div>
-    </div>    
+    </div>
   </header>
 
   <body>
@@ -34,16 +34,19 @@
         </div>
         <div class="profile-image"></div>
         <div class="profile-info">
-          <h2>Rodge Romer Muni</h2>
-          <p>Student at Gordon College, Olongapo City</p>
-          <a href="#" class="contact-link">Contact info</a>
+          <div class="profile-name">
+            <h2>{{userData.fullname}}</h2>
+            <p>{{userData.role | titlecase}}</p>
+          </div>
+          <p>{{userData.address}}</p>
+          <a href="#" class="contact-link">{{userData.phone_number}}</a>
         </div>
         <div class="profile-role">
           <p>Student at Gordon College, Olongapo City</p>
         </div>
       </div>
     </div>
-  
+
     <!-- About Me Section -->
     <div class="modern-card about-section">
       <div class="edit-icon">
@@ -52,7 +55,7 @@
       <h3>About me</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
-  
+
     <!-- Activity Section -->
     <div class="modern-card activity-section">
         <button class="create-post-btn">
@@ -101,7 +104,7 @@
           </div>
         </div>
       </div>
-      
+
       <a href="/posts"><button class="show-all-btn">Show all posts</button></a>
     </div>
 
@@ -117,7 +120,7 @@
         <li>UI/UX Design</li>
       </ul>
     </div>
-  
+
     <!-- Education Section -->
     <div class="modern-card education-section">
       <div class="edit-icon">
@@ -128,7 +131,7 @@
       <p>Information Technology</p>
       <p>Aug 2022 - 2025</p>
     </div>
-  
+
     <!-- Experience Section -->
     <div class="modern-card experience-section">
       <div class="edit-icon">

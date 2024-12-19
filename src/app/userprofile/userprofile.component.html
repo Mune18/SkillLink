@@ -13,7 +13,7 @@
       </button>
     </div>
     <div class="profile" (click)="toggleDropdown()" [class.active]="isDropdownOpen">
-      <span>Rodge Romer Muni</span>
+      <span>{{userData.fullname}}</span>
       <mat-icon>keyboard_arrow_down</mat-icon>
       <div class="dropdown-menu" *ngIf="isDropdownOpen">
         <ul>
@@ -21,14 +21,14 @@
           <li (click)="Logout()"><mat-icon>logout</mat-icon>Log Out</li>
         </ul>
       </div>
-    </div>    
+    </div>
   </header>
 
   <body>
     <!-- Profile Section -->
     <div class="profile-card modern-card">
       <div class="profile-header"></div>
-      <button class="follow-btn">+ Follow</button>  
+      <button class="follow-btn">+ Follow</button>
       <div class="profile-body">
         <div class="profile-image"></div>
         <div class="profile-info">
@@ -41,13 +41,13 @@
         </div>
       </div>
     </div>
-  
+
     <!-- About Me Section -->
     <div class="modern-card about-section">
       <h3>About me</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
-  
+
     <!-- Activity Section -->
     <div class="modern-card activity-section">
       <h3>Activity</h3>
@@ -90,7 +90,7 @@
           </div>
         </div>
       </div>
-      
+
       <a href="/posts"><button class="show-all-btn">Show all posts</button></a>
     </div>
 
@@ -103,7 +103,7 @@
         <li>UI/UX Design</li>
       </ul>
     </div>
-  
+
     <!-- Education Section -->
     <div class="modern-card education-section">
       <h3>Education</h3>
@@ -111,7 +111,7 @@
       <p>Information Technology</p>
       <p>Aug 2022 - 2025</p>
     </div>
-  
+
     <!-- Experience Section -->
     <div class="modern-card experience-section">
       <h3>Experience</h3>

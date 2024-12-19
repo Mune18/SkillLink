@@ -15,7 +15,7 @@
       </button>
     </div>
     <div class="profile" (click)="toggleDropdown()" [class.active]="isDropdownOpen">
-      <span>sds</span>
+      <span>{{userData.fullname}}</span>
       <mat-icon>keyboard_arrow_down</mat-icon>
       <div class="dropdown-menu" *ngIf="isDropdownOpen">
         <ul>
@@ -33,8 +33,8 @@
       <mat-card class="profile-card">
         <div class="profile-avatar"></div>
         <div class="profile-info">
-          <h2>Rodge Romer Muni</h2>
-          <p>Student at Gordon College, Olongapo City</p>
+          <h2>{{userData.fullname}}</h2>
+          <p>{{userData.address}}</p>
         </div>
       </mat-card>
     </aside>

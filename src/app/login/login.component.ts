@@ -47,6 +47,7 @@ export class LoginComponent {
           this.loginForm.reset();
           this.backendErrors = null;
           this.authService.setLoginData(token, role, id);
+          console.log("TOKEENNN",this.authService.getToken());
           this.router.navigate(['/home']);
 
         },
