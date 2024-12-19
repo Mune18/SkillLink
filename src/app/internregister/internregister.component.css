@@ -191,3 +191,75 @@ body {
     top: 20%;
   }
 }
+/* ========== */
+
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: white;
+  color: #555;
+  cursor: pointer;
+  appearance: none; /* Removes default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.form-container select:hover {
+  border-color: #999;
+}
+
+.form-container select:focus {
+  outline: none;
+  border-color: #34c3f3;
+  box-shadow: 0 0 0 2px rgba(52, 195, 243, 0.1);
+}
+
+/* Add responsive design */
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .form-container {
+    margin-top: 20px;
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .logo-container img,
+  .image-container img {
+    width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .form-container {
+    padding: 20px;
+    max-width: 320px;
+  }
+
+  .logo-container img,
+  .image-container img {
+    width: 400px;
+  }
+}
