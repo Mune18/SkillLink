@@ -1,3 +1,10 @@
 body { margin: 0; font-family: Inter; }
 
 
+.valid-border {
+  border-color: #4CAF50; /* green border */
+}
+
+.invalid-border {
+  border-color: #f44336; /* red border */
+}

@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
+
+
+
+export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.get('password')?.value;
+  const confirmPassword = control.get('password_confirmation')?.value;
+
+  return password === confirmPassword ? null : { passwordMismatch: true };
+}
 
 @Component({
   selector: 'app-internregister',
@@ -14,7 +23,7 @@ import { AuthService } from '../services/auth.service';
 export class InternregisterComponent implements OnInit {
   signupForm: FormGroup;
   backendErrors: { [key: string]: string[] } | null = null;
-
+  errorMessage: string | null = null;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -38,6 +47,19 @@ export class InternregisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get email() {
+    return this.signupForm.get('email');
+  }
+
+    get password() {
+    return this.signupForm.get('password');
+  }
+
+  get passwordConfirmation() {
+    return this.signupForm.get('password_confirmation');
+  }
+
+
   passwordMatchValidator(g: FormGroup) {
     return g.get('password')?.value === g.get('password_confirmation')?.value
       ? null : {'mismatch': true};
@@ -47,23 +69,40 @@ export class InternregisterComponent implements OnInit {
     if (this.signupForm.valid) {
       this.authService.registerIntern(this.signupForm.value).subscribe({
         next: (response) => {
-          this.authService.setLoginData(response.token, response.role);
+          console.log(response);
+          this.authService.setLoginData(response.token, response.role, response.id);
           this.router.navigate(['/home']);
         },
         error: (error) => {
-          if (error.errors) {
-            this.backendErrors = error.errors;
-            Object.keys(error.errors).forEach(key => {
-              const control = this.signupForm.get(key);
-              if (control) {
-                control.setErrors({ serverError: error.errors[key][0] });
-              }
-            });
+          if (error.status === 422 && error.error.errors?.email) {
+            this.errorMessage = error.error.errors.email[0]; // Extract email error
           } else {
-            console.error('Registration failed:', error);
+            this.errorMessage = 'An unexpected error occurred.';
           }
         }
       });
     }
   }
+
+
+
+  // register(): void {
+  //   if (this.signupForm.valid) {
+  //     this.authService.registerIntern(this.signupForm.value).subscribe({
+  //       next: (response) => {
+  //         console.log('Registration successful:', response);
+  //         this.signupForm.reset();
+  //         this.backendErrors = null;
+  //       },
+  //       error: (error) => {
+  //         console.error('Registration failed:', error);
+  //         if (error.status === 422) {
+  //           this.backendErrors = error.error.errors;
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     console.log('Form is invalid');
+  //   }
+  // }
 }

@@ -18,19 +18,19 @@
     <h1>Welcome to SkillLink, <br><br>Your Open Professional Community</h1>
     <div class="form-container">
       <h2>Sign In</h2>
-      <form>
+      <form [formGroup]="loginForm"  (ngSubmit)="login()">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email">
-        
+        <input formControlName="email" type="email" id="email" placeholder="Enter your email">
+
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password">
+        <input formControlName="password" type="password" id="password" placeholder="Enter your password">
 
         <a href="#" class="forgot-password-link">Forgot password?</a>
         <button type="submit">Login</button>
       </form>
       <div class="register-links">
         No account? Register Now (
-        <a href="/intern" class="intern-link">Intern</a> / 
+        <a href="/intern" class="intern-link">Intern</a> /
         <a href="/employer" class="employer-link">Employer</a>)
       </div>
     </div>

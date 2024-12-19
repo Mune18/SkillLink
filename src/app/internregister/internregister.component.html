@@ -16,9 +16,12 @@
           <div class="error-message" *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.errors">
             <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</div>
             <div *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email</div>
-            <div *ngIf="signupForm.get('email')?.errors?.['serverError']">
-              {{ signupForm.get('email')?.errors?.['serverError'] }}
+            <div *ngIf="backendErrors && backendErrors['email']">
+              <p *ngFor="let error of backendErrors['email']">{{ error }}</p>
             </div>
+          </div>
+          <div *ngIf="errorMessage" class="error">
+            {{ errorMessage }}
           </div>
         </div>
 
@@ -46,7 +49,10 @@
 
         <label for="password">Password</label>
         <input type="password" formControlName="password" id="password" placeholder="Must be at least 6 characters">
-
+        <div class="">
+          <span *ngIf="password?.errors?.['required']">Password is required.</span>
+          <span *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters.</span>
+        </div>
         <label for="confirm-password">Confirm Password</label>
         <input type="password" formControlName="password_confirmation" id="confirm-password" placeholder="Confirm your password">
 

@@ -15,7 +15,7 @@
       </button>
     </div>
     <div class="profile" (click)="toggleDropdown()" [class.active]="isDropdownOpen">
-      <span>Rodge Romer Muni</span>
+      <span>sds</span>
       <mat-icon>keyboard_arrow_down</mat-icon>
       <div class="dropdown-menu" *ngIf="isDropdownOpen">
         <ul>
@@ -23,7 +23,7 @@
           <li (click)="Logout()"><mat-icon>logout</mat-icon>Log Out</li>
         </ul>
       </div>
-    </div>    
+    </div>
   </header>
 
   <!-- Content Section -->
@@ -62,7 +62,7 @@
           </button>
         </div>
       </mat-card>
-  
+
       <mat-card class="post-card">
          <button class="postcard-follow-btn">+ Follow</button>
         <div class="post-header">
@@ -157,7 +157,7 @@
 </div>
 
   </div>
-  <div *ngIf="isMessagingOpen" class="messaging-sidebar">
+  <!-- <div *ngIf="isMessagingOpen" class="messaging-sidebar">
     <div class="messaging-header">
       <h3>Messaging</h3>
       <button class="close-messaging" (click)="toggleMessaging()">×</button>
@@ -177,7 +177,7 @@
         <span id="chat-with">Chat with:</span>
       </div>
       <div class="chat-messages">
-        <!-- Chat messages will be dynamically added here -->
+
       </div>
       <div class="chat-input-container">
         <input
@@ -189,11 +189,11 @@
         <button class="send-message" (click)="sendMessage()">Send</button>
       </div>
     </div>
-  </div>
-  
+  </div> -->
+
   <!-- Add a button or trigger to reopen the messaging sidebar -->
-  <button class="messaging-toggle" *ngIf="!isMessagingOpen" (click)="toggleMessaging()">
+  <!-- <button class="messaging-toggle" *ngIf="!isMessagingOpen" (click)="toggleMessaging()">
     <mat-icon>message</mat-icon>
-  </button>  
-  
+  </button>   -->
+
 </div>

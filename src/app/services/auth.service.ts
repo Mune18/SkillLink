@@ -19,9 +19,10 @@ export class AuthService {
   /**
    * Save the access token to localStorage
    */
-  setLoginData(token: string, role:string): void {
+  setLoginData(token: string, role:string, id: string): void {
     localStorage.setItem('access_token', token);
     localStorage.setItem('role', role);
+    localStorage.setItem('id', id);
   }
 
   /**
@@ -34,6 +35,13 @@ export class AuthService {
   getRole(): string | null {
     return localStorage.getItem('user_role');
   }
+
+  getID(): number | null {
+    const id = localStorage.getItem('id');
+    return id ? parseInt(id, 10) : null; // Convert string back to number
+  }
+
+
   /**
    * Remove the access token from localStorage
    */
@@ -59,6 +67,13 @@ InternOrRecruiter(role: string) {
     this.router.navigateByUrl('/login'); // Redirect to a fallback (e.g., login) for invalid roles
   }
 }
+
+  getMyData(id: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<any>(`${this.apiUrl}/mydata/${id}`, { headers });
+  }
+
+
 
   registerIntern(user: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -20,16 +21,50 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'], // Corrected `styleUrl` to `styleUrls`
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   posts = [
     { content: 'Lorem ipsum dolor sit amet...', image: 'assets/post-image.png' },
     { content: 'Another sample post content...', image: 'assets/post-image.png' },
   ];
 
+  userData: any = null;
   isDropdownOpen = false;
-  
+
     // Inject MatDialog into the constructor
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(private dialog: MatDialog, private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // const userId = this.getLoggedInUserId();
+    this.fetchUserData();
+  }
+
+  getLoggedInUserId(): number {
+    const user = JSON.parse(localStorage.getItem('userData') || '{}');
+    return user.id;
+  }
+
+  fetchUserData(): void {
+    const userId = this.authService.getID();
+    if (userId) {
+      this.authService.getMyData(+userId).subscribe({
+        next: (response) => {
+          console.log('User data fetched successfully:', response);
+          this.userData = response;
+        },
+        error: (error) => {
+          console.error('Failed to fetch user data:', error);
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
+        },
+      });
+    } else {
+      console.error('No user ID found in local storage.');
+      this.router.navigate(['/login']);
+    }
+  }
+
+
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
