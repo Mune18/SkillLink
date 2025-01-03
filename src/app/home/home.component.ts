@@ -22,20 +22,35 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./home.component.css'], // Corrected `styleUrl` to `styleUrls`
 })
 export class HomeComponent implements OnInit {
-  posts = [
-    { content: 'Lorem ipsum dolor sit amet...', image: 'assets/post-image.png' },
-    { content: 'Another sample post content...', image: 'assets/post-image.png' },
-  ];
-  userProfileImage: string = '';
+  forums: any[] = [];
   userData: any = {};
   isDropdownOpen = false;
 
-    // Inject MatDialog into the constructor
-  constructor(private dialog: MatDialog, private router: Router, private authService: AuthService) {}
+  constructor(
+    private dialog: MatDialog, 
+    private router: Router, 
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    // const userId = this.getLoggedInUserId();
     this.fetchUserData();
+    this.getForums();
+  }
+
+  getForums() {
+    this.authService.getForums().subscribe({
+      next: (response) => {
+        console.log("forumss", response)
+        this.forums = response.posts;
+        console.log('Forums retrieved:', this.forums);
+      },
+      error: (error) => {
+        console.error('Error retrieving forums:', error);
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+        }
+      }
+    });
   }
 
   getLoggedInUserId(): number {
@@ -51,7 +66,7 @@ export class HomeComponent implements OnInit {
           this.userData = response.user;
           console.log('User data fetched successfully:', response);
           console.log("my data:", this.userData)
-          this.userProfileImage = `${this.authService.apiUrl}${this.userData.profile_image}`;
+          // this.userProfileImage = `${this.authService.apiUrl}${this.userData.profile_image}`;
         },
         error: (error) => {
           console.error('Failed to fetch user data:', error);
@@ -109,7 +124,8 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        console.log('Post created:', result);
+        this.forums.unshift(result.post);
+        this.getForums();
       }
     });
   }
@@ -122,5 +138,9 @@ export class HomeComponent implements OnInit {
   Logout() {
     this.router.navigate(['/login']);
     this.isDropdownOpen = false; // Close the dropdown after navigating
+  }
+
+  addNewPost(post: any) {
+    this.forums.unshift(post); // Add new post to the beginning of the array
   }
 }

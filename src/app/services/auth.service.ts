@@ -50,6 +50,7 @@ export class AuthService {
   clearLoginData(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_role');
+    localStorage.removeItem('id');
   }
   private getAuthHeaders(): HttpHeaders {
     const token = this.getToken();
@@ -82,6 +83,15 @@ InternOrRecruiter(role: string) {
 getMyForum(): Observable<any> {
   const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
   return this.http.get<any>(`${this.apiUrl}/getmyforum`, { headers });
+}
+
+getMyForumById(id: number): Observable<any> {
+  const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+  return this.http.get<any>(`${this.apiUrl}/user/${id}/forums`, { headers });
+}
+getForums(): Observable<any> {
+  const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+  return this.http.get<any>(`${this.apiUrl}/forum`, { headers });
 }
 
   registerIntern(user: any): Observable<any> {

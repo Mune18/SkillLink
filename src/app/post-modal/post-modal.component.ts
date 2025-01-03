@@ -73,19 +73,23 @@ export class PostModalComponent implements OnInit {
 
   submitPost(): void {
     if (this.postForm.valid) {
-      const postData = this.postForm.value;
+      const postData = {
+        ...this.postForm.value,
+        user_id: this.userData.id,
+        created_at: new Date(),
+        likes_count: 0,
+        comments_count: 0
+      };
+
       this.authService.createForum(postData).subscribe({
         next: (response) => {
           console.log('Post created successfully:', response);
-          // Optionally, you can add logic to handle the response, like showing a success message
+          this.dialogRef.close(response);
         },
         error: (error) => {
           console.error('Error creating post:', error);
-          // Optionally, handle the error, e.g., show an error message to the user
         }
       });
-      console.log('Post submitted:', postData);
-      this.closeDialog();
     }
   }
 

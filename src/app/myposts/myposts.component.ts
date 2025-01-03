@@ -25,36 +25,114 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./myposts.component.css'],
 })
 export class MypostsComponent implements OnInit {
-  forums: any = {}
-
+  forums: any[] = [];
+  userData: any = {};
   isDropdownOpen = false;
 
-  // Inject MatDialog into the constructor
-  constructor(private dialog: MatDialog, private router: Router, private authService: AuthService) {
-
-
-  }
+  constructor(
+    private dialog: MatDialog, 
+    private router: Router, 
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.getMyPost()
+    this.checkAuthentication();
+    this.fetchUserData();
+    this.getMyPost();
   }
 
+  checkAuthentication() {
+    const token = this.authService.getToken();
+    const userId = this.authService.getID();
+    
+    if (!token || !userId) {
+      this.authService.clearLoginData();
+      this.router.navigate(['/login']);
+      return false;
+    }
+    return true;
+  }
 
   getMyPost() {
-    this.authService.getMyForum().subscribe(
-      (data) => {
-        console.log("data", data)
-        this.forums = data; // Store the retrieved forums data
-        console.log('Retrieved forums:', this.forums);
+    const token = this.authService.getToken();
+    const userId = this.authService.getID();
+  
+    if (!token || !userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
+  
+    this.authService.getMyForumById(userId).subscribe({
+      next: (response) => {
+        if (response && response.forums) {
+          this.forums = response.forums;
+          this.userData = response.user;
+          console.log('My forums:', this.forums);
+        } else {
+          console.log('Invalid response structure:', response);
+          this.forums = [];
+        }
       },
-      (error) => {
+      error: (error) => {
         console.error('Error retrieving forums:', error);
+        if (error.status === 401) {
+          this.authService.clearLoginData();
+          this.router.navigate(['/login']);
+        }
+        this.forums = [];
       }
-    );
+    });
   }
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+    this.isDropdownOpen = false;
+  }
+
+  Logout() {
+    this.authService.clearLoginData();
+    this.router.navigate(['/login']);
+    this.isDropdownOpen = false;
+  }
+
+  openPostModal(): void {
+    const dialogRef = this.dialog.open(PostModalComponent, {
+      width: '600px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        // Refresh the posts list after creating a new post
+        this.getMyPost();
+      }
+    });
+  }
+
+  fetchUserData(): void {
+    const userId = this.authService.getID();
+    if (userId) {
+      this.authService.getMyData(userId).subscribe({
+        next: (response) => {
+          this.userData = response.user;
+          console.log('User data fetched successfully:', response);
+        },
+        error: (error) => {
+          console.error('Failed to fetch user data:', error);
+          if (error.status === 401) {
+            this.authService.clearLoginData();
+            this.router.navigate(['/login']);
+          }
+        },
+      });
+    } else {
+      console.error('No user ID found in local storage.');
+      this.router.navigate(['/login']);
+    }
   }
 
   isMessagingOpen = true;
@@ -86,34 +164,11 @@ export class MypostsComponent implements OnInit {
     }
   }
 
-  openPostModal(): void {
-    const dialogRef = this.dialog.open(PostModalComponent, {
-      width: '600px',
-      disableClose: true,
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        console.log('Post created:', result);
-      }
-    });
-  }
-
   editPost(postId: string): void {
     console.log('Edit post with ID:', postId);
   }
 
   deletePost(postId: string): void {
     console.log('Delete post with ID:', postId);
-  }
-
-  goToProfile() {
-    this.router.navigate(['/profile']);
-    this.isDropdownOpen = false; // Close the dropdown after navigating
-  }
-
-  Logout() {
-    this.router.navigate(['/login']);
-    this.isDropdownOpen = false; // Close the dropdown after navigating
   }
 }
