@@ -9,8 +9,8 @@
   <header>
     <img src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
     <nav>
-      <a href="/intern">Intern Sign-Up</a>
-      <a href="/employer">Employer Sign-Up</a>
+      <a routerLink="/intern">Intern Sign-Up</a>
+      <a routerLink="/employer">Employer Sign-Up</a>
     </nav>
   </header>
 
@@ -18,20 +18,30 @@
     <h1>Welcome to SkillLink, <br><br>Your Open Professional Community</h1>
     <div class="form-container">
       <h2>Sign In</h2>
-      <form [formGroup]="loginForm"  (ngSubmit)="login()">
+      <form class="error" [formGroup]="loginForm"  (ngSubmit)="login()">
         <label for="email">Email</label>
         <input formControlName="email" type="email" id="email" placeholder="Enter your email">
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-messages">
+          <p *ngIf="email?.errors?.['required']">Email is required.</p>
+          <p *ngIf="email?.errors?.['email']">Please enter a valid email address.</p>
+        </div>
 
+        <!-- Password Field -->
         <label for="password">Password</label>
         <input formControlName="password" type="password" id="password" placeholder="Enter your password">
-
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-messages">
+          <p *ngIf="password?.errors?.['required']">Password is required.</p>
+        </div>
+        <div *ngIf="backendErrors && backendErrors['general']">
+          <p *ngFor="let error of backendErrors['general']">{{ error }}</p>
+        </div>
         <a href="#" class="forgot-password-link">Forgot password?</a>
         <button type="submit">Login</button>
       </form>
       <div class="register-links">
         No account? Register Now (
-        <a href="/intern" class="intern-link">Intern</a> /
-        <a href="/employer" class="employer-link">Employer</a>)
+        <a routerLink="/intern" class="intern-link">Intern</a> /
+        <a routerLink="/employer" class="employer-link">Employer</a>)
       </div>
     </div>
     <div class="logo-container">

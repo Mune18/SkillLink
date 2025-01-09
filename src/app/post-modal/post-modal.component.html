@@ -4,23 +4,38 @@
     <div class="profile">
       <mat-icon class="avatar">account_circle</mat-icon>
       <div class="profile-info">
-        <span class="username">{{userData.fullname}}</span>
+        <span class="username">{{ userData.fullname }}</span>
       </div>
     </div>
 
     <!-- Text Input Area -->
     <div class="input-area">
       <label>What do you want to talk about?</label>
-      <input type="text" formControlName="title" placeholder="Enter the Forum Title">
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Enter the Forum Title"
+      />
+      <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched" class="error">
+        <small *ngIf="postForm.get('title')?.errors?.['required']">Title is required.</small>
+        <small *ngIf="postForm.get('title')?.errors?.['minlength']">Title must be at least 15 characters long.</small>
+      </div>
+
       <textarea formControlName="desc" placeholder="Write something..."></textarea>
+      <div *ngIf="postForm.get('desc')?.invalid && postForm.get('desc')?.touched" class="error">
+        <small *ngIf="postForm.get('desc')?.errors?.['required']">Description is required.</small>
+        <small *ngIf="postForm.get('desc')?.errors?.['minlength']">Description must be at least 15 characters long, make it meaningful.</small>
+      </div>
     </div>
 
-    <!-- Actions & Attachments -->
+    <!-- Image Upload -->
     <div class="post-options">
-      <button class="post-option">
+      <label class="post-option">
         <mat-icon class="photo-icon">photo</mat-icon>
         Photo
-      </button>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden />
+      </label>
+      <span *ngIf="selectedFile">{{ selectedFile.name }}</span>
     </div>
   </mat-dialog-content>
 

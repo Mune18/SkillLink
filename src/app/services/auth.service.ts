@@ -71,15 +71,30 @@ InternOrRecruiter(role: string) {
   }
 }
 
-  getMyData(id: number): Observable<any> {
+getMyData(id: number): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get<any>(`${this.apiUrl}/mydata/${id}`, { headers });
   }
 
-  createForum(data: any): Observable<any> {
+createForum(data: any): Observable<any> {
     const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
     return this.http.post<any>(`${this.apiUrl}/forum`, data, { headers });
 }
+
+addComment(data: any): Observable<any> {
+  const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+  return this.http.post<any>(`${this.apiUrl}/comment`, data, { headers });
+}
+addReply(data: any): Observable<any> {
+  const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+  return this.http.post<any>(`${this.apiUrl}/reply`, data, { headers });
+}
+
+likePost(data:any): Observable<any> {
+  const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+  return this.http.post<any>(`${this.apiUrl}/like/forum`, data, { headers });
+}
+
 getMyForum(): Observable<any> {
   const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
   return this.http.get<any>(`${this.apiUrl}/getmyforum`, { headers });
@@ -89,6 +104,12 @@ getMyForumById(id: number): Observable<any> {
   const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
   return this.http.get<any>(`${this.apiUrl}/user/${id}/forums`, { headers });
 }
+
+getComments(forumId:any): Observable<any> {
+  const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
+  return this.http.get<any>(`${this.apiUrl}/comments/${forumId}`, { headers });
+}
+
 getForums(): Observable<any> {
   const headers = this.getAuthHeaders(); // Ensure this method returns the correct headers with the token
   return this.http.get<any>(`${this.apiUrl}/forum`, { headers });

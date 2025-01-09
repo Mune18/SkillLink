@@ -1,4 +1,8 @@
 /* Profile Section */
+
+form{
+  border-radius: 10px;
+}
 .profile {
     display: flex;
     align-items: center;

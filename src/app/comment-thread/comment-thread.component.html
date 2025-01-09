@@ -1,0 +1,46 @@
+<div *ngFor="let comment of comments" class="comment-thread">
+  <div class="comment-content">
+    <div class="comment-header">
+      <img [src]="comment.user?.profile_image || 'assets/default-avatar.png'" alt="User Avatar" class="comment-avatar">
+      <div class="comment-info">
+        <strong>{{ comment.user?.fullname }}</strong>
+        <span class="comment-role">{{ comment.user?.role }}</span>
+        <small class="comment-time">{{ comment.created_at | timeAgo }}</small>
+      </div>
+    </div>
+
+    <p class="comment-text">{{ comment.comment }}</p>
+
+    <div class="comment-actions">
+      <button mat-button (click)="showFormComment(comment.id)">
+        <mat-icon>reply</mat-icon>
+        Reply
+      </button>
+    </div>
+
+    <form *ngIf="visibleFormId === comment.id"
+          [formGroup]="replyForm"
+          (ngSubmit)="onSubmitReply(comment.id, comment.forum_id)"
+          class="reply-form">
+      <input type="text"
+             formControlName="reply"
+             placeholder="Write a reply..."
+             required>
+      <div>
+        <button type="button" (click)="cancelReply()">Cancel</button>
+        <button type="submit" [disabled]="!replyForm.valid">Reply</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Simple nested replies with proper indentation -->
+  <div *ngIf="comment.replies?.length > 0" class="nested-replies">
+    <app-comment-thread
+      [comments]="comment.replies"
+      [replyForm]="replyForm"
+      [visibleFormId]="visibleFormId"
+      (submitReply)="onSubmitReply($event.commentId, $event.forumId)"
+      (cancelReplyForm)="cancelReply()">
+    </app-comment-thread>
+  </div>
+</div>

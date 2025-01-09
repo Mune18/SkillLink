@@ -1,0 +1,277 @@
+<div class="main-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <a routerLink="/home" href="" >
+        <img src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
+      </a>
+    </div>
+    <!-- <nav class="nav">
+      <a href="/home">Home</a>
+      <a href="/posts">My Posts</a>
+    </nav> -->
+    <div class="search-bar">
+      <input type="text" placeholder="Search" class="search-input" />
+      <button class="search-button">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <div class="profile" (click)="toggleDropdown()" [class.active]="isDropdownOpen">
+      <span>{{userData.fullname | titlecase}}</span>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+      <div class="dropdown-menu" *ngIf="isDropdownOpen">
+        <ul>
+          <li (click)="goToProfile()"><mat-icon>person</mat-icon>Profile</li>
+          <li (click)="Logout()"><mat-icon>logout</mat-icon>Log Out</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Section -->
+  <div class="content">
+    <!-- Profile Sidebar -->
+    <aside class="profile-sidebar">
+      <mat-card class="profile-card">
+        <div>
+          <img class="profile-avatar" [src]="userData.profile_image" alt="">
+        </div>
+        <div class="profile-info">
+          <h2>{{userData.fullname | titlecase}}</h2>
+          <p>{{userData.role | titlecase }} </p>
+          <p>{{userData.address}}</p>
+          <p>{{userRoleData.school}}</p>
+          <p>{{userRoleData.degree}}</p>
+        </div>
+      </mat-card>
+    </aside>
+
+    <!-- Posts Section -->
+    <section class="posts-section" >
+
+        <mat-card class="post-input-card" *ngIf="forum">
+          <!-- Updated Back Arrow Design with Click Event -->
+          <button mat-icon-button color="primary" (click)="goBack()" aria-label="Back to homepage">
+              <mat-icon class="back-arrow-icon">arrow_back</mat-icon>
+          </button>
+          <div class="post-header">
+            <div>
+              <img class="post-avatar" [src]="userData.profile_image" alt="">
+            </div>
+              <div>
+                @if (forum.user?.fullname) {
+                  <h3>{{ forum.user?.fullname | titlecase }} </h3>
+                }@else {
+                  <h3>{{ forumUser.fullname | titlecase }} </h3>
+                  }
+                  @if (forum.user?.role) {
+                    <span id="user-name">{{ forum.user?.role }}</span>
+                  }@else {
+                    <span id="user-name">{{ forumUser.role }}</span>
+                    }
+                  <span id="user-name">{{ forum.role }}</span>
+                  <p class="post-time">{{ forum.created_at | date: 'mediumDate' }}</p>
+                  <p class="post-time">{{ forum.created_at | timeAgo }}</p>
+              </div>
+          </div>
+
+          <!-- Post Content -->
+          <p class="post-text">
+              <strong>{{ forum.title | titlecase }}</strong><br>
+              <strong>ID: {{ forum.id }}</strong><br>
+              {{ forum.desc }}
+          </p>
+
+          <!-- Post Image -->
+          <div class="post-image-container" *ngIf="forum.image">
+              <img [src]="forum.image" alt="Post Image" class="post-image" />
+          </div>
+
+          <!-- Post Actions -->
+          <div class="post-actions">
+              <button mat-flat-button color="accent" (click)="likePost(forum.id, forum)">
+                  <mat-icon class="icon" [class.liked-icon]="forum.isLiked">arrow_upward</mat-icon>
+                  <span>{{ forum.likes_count }}</span>
+              </button>
+              <button mat-flat-button color="warn">
+                  <mat-icon class="icon" [class.commented-icon]="forum.isCommented">comment</mat-icon>
+                  <span>{{ forum.comments_count }}</span>
+              </button>
+          </div>
+        <!-- Initial Input -->
+<input
+type="text"
+*ngIf="!isFormVisible"
+(click)="showForm(forum.id)"
+class="hidden-input"
+placeholder="Add a comment..."
+/>
+
+<!-- Form with Buttons -->
+<form  *ngIf="visibleFormId === forum.id && isFormVisible" [formGroup]="commentForm" class="comment-form"  (submit)="submitComment()">
+<input type="text" formControlName="comment"  placeholder="Write a comment..." required />
+<button type="button" (click)="cancelForm()" class="cancel-btn">Cancel</button>
+<button type="submit" class="submit-btn">Comment</button>
+</form>
+<ng-container *ngFor="let comment of comments || []">
+  <div class="comment-container">
+    <div class="comment-header">
+      <div>
+        <img class="comment-avatar" [src]="comment.user?.profile_image" alt="" width="11">
+        <p>{{ comment.user?.fullname }}</p>
+        <span></span>
+        <p>{{ comment.user?.role }}</p>
+      </div>
+      <div>
+        <p id="comment-date">{{ comment.created_at | timeAgo }}</p>
+      </div>
+    </div>
+    <p class="comment-text">
+      {{ comment.comment }}
+    </p>
+    <div class="post-actions-comment">
+      <mat-icon class="icon-comment" [class.liked-icon]="forum?.isLiked">arrow_upward</mat-icon>
+      <mat-icon class="icon-comment" [class.commented-icon]="forum?.isCommented" (click)="showFormComment(comment.id)">comment</mat-icon>
+      <form *ngIf="visibleFormId === comment.id" [formGroup]="replyForm" class="comment-form" (submit)="submitReply(comment.id, comment.forum_id)">
+        <input type="text" formControlName="reply" placeholder="Write a comment..." required />
+        <button type="button" (click)="cancelForm()" class="cancel-btn">Cancel</button>
+        <button type="submit" class="submit-btn">Reply</button>
+      </form>
+    </div>
+
+    <!-- Recursive Rendering of Replies -->
+    <div class="comment-child" *ngIf="comment.replies?.length">
+      <app-comment-thread
+      [comments]="comment.replies"
+      [replyForm]="replyForm"
+      [visibleFormId]="visibleFormId"
+      (submitReply)="submitReply($event.commentId, $event.forumId)">
+    </app-comment-thread>
+
+
+
+    </div>
+  </div>
+</ng-container>
+
+
+
+
+
+
+
+      </mat-card>
+        <!-- <div class="post-input-header">
+          <div>
+            <img class="post-avatar" [src]="userData.profile_image" alt="User Avatar">
+          </div>
+          <input
+            type="text"
+            class="post-input"
+            placeholder="Create a post"
+
+          />
+        </div>
+        <div  class="post-options">
+          <button  class="post-option">
+            <mat-icon class="photo-icon">photo</mat-icon>
+            Photo
+          </button>
+          <input
+            type="file"
+            #fileInput
+
+            accept="image/*"
+            hidden
+          />
+        </div> -->
+
+
+
+      <!-- Forum Posts -->
+   <!-- Display State Data from Router -->
+
+
+
+<!-- Debugging Section to Ensure StateData is Visible
+<pre *ngIf="stateData">
+    <strong>State Data (Debugging Purpose):</strong>
+    {{ stateData | json }}
+</pre> -->
+
+
+      <!-- 2d2f33 -->
+
+
+    </section>
+
+    <!-- Add to Your Feed Card -->
+<div class="feed-card">
+  <h3 class="feed-title"> <mat-icon style="color: rgb(51, 51, 80);">rocket_launch</mat-icon> Top Forums  </h3>
+
+<hr>
+  <!-- Feed Item 1 -->
+  <div class="feed-item" *ngFor="let top of topForums">
+    <img
+    [src]="top.image || 'https://i.pinimg.com/736x/0a/8e/d2/0a8ed2c0000a5b7ca50f247a4213aba3.jpg'"
+    alt="Work from Home Logo"
+    class="feed-top-content"
+  >
+
+    <div class="feed-info">
+      <span class="feed-name">{{top.title | titlecase}}</span>
+      <span class="feed-description">{{top.desc}}</span>
+      <div class="like-comments">
+        <span  class="feed-description"> <mat-icon>rocket_launch</mat-icon> {{top.likes_count}} </span>
+        <span class="feed-description"> <mat-icon>comment</mat-icon> {{top.comments_count}} </span>
+      </div>
+    </div>
+
+    <button class="follow-btn">Look up</button>
+  </div>
+
+  <!-- Bottom View Link -->
+  <a href="#" class="view-recommendations">View all recommendations →</a>
+</div>
+
+  </div>
+  <!-- <div *ngIf="isMessagingOpen" class="messaging-sidebar">
+    <div class="messaging-header">
+      <h3>Messaging</h3>
+      <button class="close-messaging" (click)="toggleMessaging()">×</button>
+    </div>
+    <div class="connection-list">
+      <div class="connection" (click)="openChat('John Doe')">
+        <div class="connection-avatar"></div>
+        <span class="connection-name">John Doe</span>
+      </div>
+      <div class="connection" (click)="openChat('Jane Smith')">
+        <div class="connection-avatar"></div>
+        <span class="connection-name">Jane Smith</span>
+      </div>
+    </div>
+    <div class="chat-window">
+      <div class="chat-header">
+        <span id="chat-with">Chat with:</span>
+      </div>
+      <div class="chat-messages">
+
+      </div>
+      <div class="chat-input-container">
+        <input
+          type="text"
+          class="chat-input"
+          placeholder="Type a message..."
+          (keyup.enter)="sendMessage()"
+        />
+        <button class="send-message" (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Add a button or trigger to reopen the messaging sidebar -->
+  <!-- <button class="messaging-toggle" *ngIf="!isMessagingOpen" (click)="toggleMessaging()">
+    <mat-icon>message</mat-icon>
+  </button>   -->
+
+</div>

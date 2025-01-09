@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { Component } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-visit',
   standalone: true,
   imports: [
     MatCardModule,
@@ -18,28 +18,27 @@ import { AuthService } from '../services/auth.service';
     MatDialogModule,
     RouterModule
   ],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  templateUrl: './visit.component.html',
+  styleUrl: './visit.component.css'
 })
-export class ProfileComponent implements OnInit{
+export class VisitComponent {
   userData: any = {};
-  forums: any[] = [];
-  userRoleData: any = {};
-  showAll: boolean = false;
+  stateData: any = {};
+  userRoleData:any = {};
   displayedForums: any[] = [];
+  forums: any[] = [];
+  showAll: boolean = false;
   constructor(private dialog: MatDialog, private router: Router,  private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.stateData = history.state;
     // const userId = this.getLoggedInUserId();
     this.fetchUserData();
     this.getMyPost();
-
   }
 
-
-
   fetchUserData(): void {
-    const userId = this.authService.getID();
+    const userId = this.stateData.userId;
     if (userId) {
       this.authService.getMyData(+userId).subscribe({
         next: (response) => {
@@ -62,9 +61,10 @@ export class ProfileComponent implements OnInit{
     }
   }
 
+
   getMyPost() {
     const token = this.authService.getToken();
-    const userId = this.authService.getID();
+    const userId = this.stateData.userId;
 
     if (!token || !userId) {
       this.router.navigate(['/login']);
@@ -74,11 +74,10 @@ export class ProfileComponent implements OnInit{
     this.authService.getMyForumById(userId).subscribe({
       next: (response) => {
         if (response && response.forums) {
-          this.forums = response.forums,
+          this.forums = response.forums;
           this.userData = response.user;
           this.displayedForums = this.forums.slice(0, 3);
           console.log('My forums:', this.forums);
-
         } else {
           console.log('Invalid response structure:', response);
           this.forums = [];
@@ -106,20 +105,21 @@ export class ProfileComponent implements OnInit{
 
   commentPost(postId: number, forum: any, userData:any): void {
     this.router.navigate(['/comments'], { state: { forum, postId, userData } });
+    console.log("DAATAA", userData);
   }
 
-  isDropdownOpen = false;
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
+    isDropdownOpen = false;
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    }
 
-  goToProfile() {
-    this.router.navigate(['/profile']);
-    this.isDropdownOpen = false; // Close the dropdown after navigating
-  }
+    goToProfile() {
+      this.router.navigate(['/profile']);
+      this.isDropdownOpen = false; // Close the dropdown after navigating
+    }
 
-  Logout() {
-    this.router.navigate(['/login']);
-    this.isDropdownOpen = false; // Close the dropdown after navigating
-  }
+    Logout() {
+      this.router.navigate(['/login']);
+      this.isDropdownOpen = false; // Close the dropdown after navigating
+    }
 }

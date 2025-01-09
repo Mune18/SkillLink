@@ -1,11 +1,11 @@
   <header class="header">
     <div class="logo">
-      <img src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
+      <img routerLink="/home" src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
     </div>
-    <nav class="nav">
-      <a href="/home">Home</a>
+    <!-- <nav class="nav">
+      <a routerLink="/home">Home</a>
       <a href="/posts">My Posts</a>
-    </nav>
+    </nav> -->
     <div class="search-bar">
       <input type="text" placeholder="Search" class="search-input" />
       <button class="search-button">
@@ -27,12 +27,16 @@
   <body>
     <!-- Profile Section -->
     <div class="profile-card modern-card">
-      <div class="profile-header"></div>
+
+        <img class="profile-header" [src]="userRoleData.cover_image || 'https://i.pinimg.com/736x/0d/d0/bb/0dd0bbbc6c38a555d0817e8051ef2b12.jpg'" alt="">
+
       <div class="profile-body">
         <div class="edit-icon">
           <mat-icon>edit</mat-icon>
         </div>
-        <div class="profile-image"></div>
+        <div >
+          <img class="profile-image" [src]="userData.profile_image" alt="">
+        </div>
         <div class="profile-info">
           <div class="profile-name">
             <h2>{{userData.fullname}}</h2>
@@ -53,7 +57,8 @@
         <mat-icon>edit</mat-icon>
       </div>
       <h3>About me</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>{{ userRoleData?.about || "You haven't input anything yet 🤣" }}</p>
+
     </div>
 
     <!-- Activity Section -->
@@ -65,47 +70,45 @@
           <mat-icon>edit</mat-icon>
         </div>
       <h3>Activity</h3>
-      <h5>14,113 followers</h5>
+      <!-- <h5>14,113 followers</h5> -->
       <div class="activity-tabs">
         <button class="tab active">Posts</button>
-        <button class="tab">Comments</button>
+         <button class="tab">Comments</button>
         <button class="tab">Images</button>
       </div>
+
       <div class="activity-posts">
         <!-- Post 1 -->
-        <div class="post">
+        <div class="post" *ngFor="let forum of displayedForums">
+          <p class="post-title">
+            {{ forum.title }}
+          </p>
+          @if (forum.image) {
+            <img class="forum-image" [src]="forum.image" alt="">
+          }@else{
+            <p class="post-text">
+            </p>
+          }
           <p class="post-text">
-            I received an email from a fresher who wanted to work for free. <br />
-            When I read the email, I immediately asked him to visit the office...
+
+            {{ forum.desc }}
           </p>
           <div class="post-footer">
             <div class="reaction-icons">
-              <mat-icon>thumb_up</mat-icon>
-              <mat-icon>favorite</mat-icon>
-              <span>9,863</span>
+              <mat-icon>arrow_upward</mat-icon>
+              <span>{{forum.likes_count}}</span>
             </div>
-            <span class="comments-count">342 comments</span>
+            <!-- Image with a fixed size -->
+            <span class="comments-count" (click)="commentPost(forum.id, forum, userData)">{{forum.comments_count}} comments</span>
           </div>
+
         </div>
 
-        <!-- Post 2 -->
-        <div class="post">
-          <p class="post-text">
-            There's a vacancy for Company Secretary/Semi Qualified Person <br />
-            Position: CS or Semi CS...
-          </p>
-          <div class="post-footer">
-            <div class="reaction-icons">
-              <mat-icon>thumb_up</mat-icon>
-              <mat-icon>favorite</mat-icon>
-              <span>47</span>
-            </div>
-            <span class="comments-count">40 comments</span>
-          </div>
-        </div>
-      </div>
 
-      <a href="/posts"><button class="show-all-btn">Show all posts</button></a>
+          <button class="tab" *ngIf="forums.length > 3 " (click)="toggleShowAll()">
+            {{ showAll ? 'Show fewer posts' : 'Show all posts' }}
+          </button>
+
     </div>
 
     <!-- Skills Section -->
@@ -127,9 +130,8 @@
         <mat-icon>edit</mat-icon>
       </div>
       <h3>Education</h3>
-      <p><strong>Gordon College, Olongapo City</strong></p>
-      <p>Information Technology</p>
-      <p>Aug 2022 - 2025</p>
+      <p><strong>{{userRoleData.school}}</strong></p>
+      <p>{{userRoleData.degree}}</p>
     </div>
 
     <!-- Experience Section -->
@@ -143,4 +145,4 @@
       <p>Jul 2023 - Jul 2023</p>
       <p>Subic Central Luzon, Philippines</p>
     </div>
-  </body>
+

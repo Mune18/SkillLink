@@ -1,21 +1,42 @@
 <div class="main-container">
+
+  <div *ngIf="isLoading" class="loading-overlay">
+    <mat-spinner></mat-spinner>
+    <p>Loading data, please wait...</p>
+  </div>
   <!-- Header -->
+   <div *ngIf="!isLoading">
+
+
   <header class="header">
     <div class="logo">
-      <img src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
+      <a routerLink="/home" href="" >
+        <img src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
+      </a>
     </div>
     <nav class="nav">
-      <a href="/home">Home</a>
-      <a href="/posts">My Posts</a>
+      <a >
+        <mat-icon routerLink="/profile" routerLinkActive="active-link" class="custom-icon" matTooltip="Intern">group</mat-icon>
+      </a>
+      <a >
+        <mat-icon routerLink="/home" routerLinkActive="active-link" class="custom-icon" matTooltip="Home">forum</mat-icon>
+      </a>
+      <a >
+        <mat-icon routerLink="/posts" routerLinkActive="active-link" class="custom-icon" matTooltip="Recruiter">work</mat-icon>
+      </a>
     </nav>
-    <div class="search-bar">
+    <!-- <div class="search-bar">
       <input type="text" placeholder="Search" class="search-input" />
       <button class="search-button">
         <mat-icon>search</mat-icon>
       </button>
-    </div>
+    </div> -->
     <div class="profile" (click)="toggleDropdown()" [class.active]="isDropdownOpen">
-      <span>{{userData.fullname}}</span>
+
+
+      <!-- <input type="text" name="" id=""> -->
+      <img  class="post-avatar"  [src]="userData.profile_image" alt="">
+      <span>{{userData.fullname | titlecase}}</span>
       <mat-icon>keyboard_arrow_down</mat-icon>
       <div class="dropdown-menu" *ngIf="isDropdownOpen">
         <ul>
@@ -31,19 +52,27 @@
     <!-- Profile Sidebar -->
     <aside class="profile-sidebar">
       <mat-card class="profile-card">
-        <div class="profile-avatar"></div>
+        <!-- <img class="profile-header" [src]="userRoleData.cover_image || 'https://i.pinimg.com/736x/0d/d0/bb/0dd0bbbc6c38a555d0817e8051ef2b12.jpg'" alt=""> -->
+        <div>
+          <img class="profile-avatar" [src]="userData.profile_image" alt="">
+        </div>
         <div class="profile-info">
-          <h2>{{userData.fullname}}</h2>
+          <h2>{{userData.fullname | titlecase}}</h2>
+          <p>{{userData.role | titlecase }} </p>
           <p>{{userData.address}}</p>
+          <p>{{userRoleData.school}}</p>
+          <p>{{userRoleData.degree}}</p>
         </div>
       </mat-card>
     </aside>
 
     <!-- Posts Section -->
     <section class="posts-section">
-      <mat-card class="post-input-card">
+      <mat-card class="post-card">
         <div class="post-input-header">
-          <div class="post-avatar"></div>
+          <div>
+            <img class="post-avatar" [src]="userData.profile_image" alt="User Avatar">
+          </div>
           <input
             type="text"
             class="post-input"
@@ -51,76 +80,128 @@
             (click)="openPostModal()"
           />
         </div>
-        <div class="post-options">
-          <button class="post-option">
+        <div (click)="triggerFileAndModal()" class="post-options">
+          <button  class="post-option">
             <mat-icon class="photo-icon">photo</mat-icon>
             Photo
           </button>
+          <input
+            type="file"
+            #fileInput
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            hidden
+          />
         </div>
       </mat-card>
 
+
       <!-- Forum Posts -->
       <mat-card class="post-card" *ngFor="let forum of forums">
-        <button class="postcard-follow-btn">+ Follow</button>
         <div class="post-header">
-          <div class="post-avatar"></div>
-          <div>
-            <h3>{{forum.user.fullname}}</h3>
-            <p>{{forum.user.address}}</p>
-            <p class="post-time">{{forum.created_at | date:'mediumDate'}}</p>
+          <!-- <div >dsds</div> -->
+          <img  class="post-avatar" [src]="forum.user.profile_image" alt="">
+          <div style="width: 100%;">
+            <div>
+              <h3 class="fullname" (click)="Visit(forum.user_id)">{{ forum.user.fullname | titlecase }}</h3>
+              <span id="user-name">{{ forum.user.role }}</span>
+            </div>
+            <!-- <p>{{ forum.user.address }}</p> -->
+            <!-- <p class="post-time">{{ forum.created_at | date: 'mediumDate' }}</p> -->
+            <p class="post-time">{{ forum.created_at | timeAgo }}</p>
           </div>
+          <div style="float: right;  display: flex; justify-content: end;">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>save</mat-icon>
+                <span>Save Forum</span>
+              </button>
+
+            </mat-menu>
+          </div>
+
         </div>
         <p class="post-text">
-          <strong>{{forum.title}}</strong><br>
-          {{forum.desc}}
+          <strong class="forum-title">{{ forum.title | titlecase }}</strong><br>
+          <!-- <strong>{{ forum.id }}</strong><br> -->
+          {{ forum.desc }}
         </p>
         <div class="post-image-container" *ngIf="forum.image">
           <img [src]="forum.image" alt="Post Image" class="post-image" />
         </div>
-        <div class="post-stats">
-          <span><mat-icon>thumb_up</mat-icon> {{forum.likes_count}} Reacts</span>
-          <span><mat-icon>comment</mat-icon> {{forum.comments_count}} Comments</span>
-        </div>
+        <!-- <div class="post-stats">
+          <span><mat-icon>rocket_launch</mat-icon> {{ forum.likes_count }} Boosts</span>
+          <span><mat-icon>comment</mat-icon> {{ forum.comments_count }} Comments</span>
+        </div> -->
         <div class="post-actions">
-          <button><mat-icon>thumb_up</mat-icon> Like</button>
-          <button><mat-icon>comment</mat-icon> Comment</button>
-          <button><mat-icon>share</mat-icon> Share</button>
+          <button class="action-btn" style="background-color: #e1e5eb;" (click)="likePost(forum.id, forum)">
+            <mat-icon class="icon" [class.liked-icon]="forum.isLiked">arrow_upward</mat-icon>
+            <span>{{ forum.likes_count }}</span>
+          </button>
+          <button class="action-btn" style="background-color: #e1e5eb;" (click)="commentPost(forum.id, forum)">
+            <mat-icon class="icon" [class.commented-icon]="forum.isCommented">comment</mat-icon>
+            <span>{{ forum.comments_count }}</span>
+          </button>
         </div>
       </mat-card>
+
+      <!-- 2d2f33 -->
+
+
     </section>
 
     <!-- Add to Your Feed Card -->
 <div class="feed-card">
-  <h3 class="feed-title">Add to your feed</h3>
+  <h3 class="feed-title"> <mat-icon style="color: rgb(255, 255, 255);">rocket_launch</mat-icon> Top Forums  </h3>
 
   <!-- Feed Item 1 -->
-  <div class="feed-item">
-    <img src="work-from-home-logo.png" alt="Work from Home Logo" class="feed-avatar">
-    <div class="feed-info">
-      <span class="feed-name">Work from Home / Remote Jobs</span>
-      <span class="feed-description">Company • Human Resources Services</span>
+  <div class="feed-item" *ngFor="let top of topForums">
+    @if(top.image) {
+      <img
+      [src]="top.image"
+      alt="Work from Home Logo"
+      class="feed-top-content"
+    >
+    }
+
+    <div class="feed-info" >
+      <span class="feed-name" (click)="commentPost(top.id, top)">{{top.title | titlecase}}</span>
+      <span class="feed-description truncated-text">{{top.desc}}</span>
+      <div class="like-comments">
+        <span  class="feed-description"> <mat-icon>rocket_launch</mat-icon> {{top.likes_count}} </span>
+        <span class="feed-description"> <mat-icon>comment</mat-icon> {{top.comments_count}} </span>
+      </div>
     </div>
-    <button class="follow-btn">+ Follow</button>
+
+    <!-- <button class="follow-btn" (click)="commentPost(top.id, top)">Look up</button> -->
   </div>
 
-  <!-- Feed Item 2 -->
-  <div class="feed-item">
-    <img src="bill-gates.jpg" alt="Bill Gates" class="feed-avatar">
-    <div class="feed-info">
-      <span class="feed-name">Bill Gates</span>
-      <span class="feed-description">Chair, Gates Foundation and Founder, Breakthrough Energy</span>
-    </div>
-    <button class="follow-btn">+ Follow</button>
-  </div>
+  <h3 class="feed-title"> <mat-icon style="color: rgb(255, 255, 255);">forum</mat-icon> Recent Forums  </h3>
 
-  <!-- Feed Item 3 -->
-  <div class="feed-item">
-    <img src="marge-aviso.jpg" alt="Marge Aviso" class="feed-avatar">
-    <div class="feed-info">
-      <span class="feed-name">Marge Aviso</span>
-      <span class="feed-description">CEO | Helping You Build Top 5% Talented Teams & VAs in the Philippines</span>
+  <div class="feed-item" *ngFor="let top of recentForums">
+
+    @if(top.image) {
+      <img
+      [src]="top.image"
+      alt="Work from Home Logo"
+      class="feed-top-content"
+    >
+    }
+
+
+    <div class="feed-info" >
+      <span class="feed-name" (click)="commentPost(top.id, top)">{{top.title | titlecase}}</span>
+      <span class="feed-description truncated-text">{{top.desc}}</span>
+      <div class="like-comments">
+        <span  class="feed-description"> <mat-icon>rocket_launch</mat-icon> {{top.likes_count}} </span>
+        <span class="feed-description"> <mat-icon>comment</mat-icon> {{top.comments_count}} </span>
+      </div>
     </div>
-    <button class="follow-btn">+ Follow</button>
+
+    <!-- <button class="follow-btn" (click)="commentPost(top.id, top)">Look up</button> -->
   </div>
 
   <!-- Bottom View Link -->
@@ -128,43 +209,8 @@
 </div>
 
   </div>
-  <!-- <div *ngIf="isMessagingOpen" class="messaging-sidebar">
-    <div class="messaging-header">
-      <h3>Messaging</h3>
-      <button class="close-messaging" (click)="toggleMessaging()">×</button>
-    </div>
-    <div class="connection-list">
-      <div class="connection" (click)="openChat('John Doe')">
-        <div class="connection-avatar"></div>
-        <span class="connection-name">John Doe</span>
-      </div>
-      <div class="connection" (click)="openChat('Jane Smith')">
-        <div class="connection-avatar"></div>
-        <span class="connection-name">Jane Smith</span>
-      </div>
-    </div>
-    <div class="chat-window">
-      <div class="chat-header">
-        <span id="chat-with">Chat with:</span>
-      </div>
-      <div class="chat-messages">
 
-      </div>
-      <div class="chat-input-container">
-        <input
-          type="text"
-          class="chat-input"
-          placeholder="Type a message..."
-          (keyup.enter)="sendMessage()"
-        />
-        <button class="send-message" (click)="sendMessage()">Send</button>
-      </div>
-    </div>
-  </div> -->
 
-  <!-- Add a button or trigger to reopen the messaging sidebar -->
-  <!-- <button class="messaging-toggle" *ngIf="!isMessagingOpen" (click)="toggleMessaging()">
-    <mat-icon>message</mat-icon>
-  </button>   -->
-
+</div>
+<!-- ===== -->
 </div>

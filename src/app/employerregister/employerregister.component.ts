@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule  } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-employerregister',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,  FormsModule],
+  imports: [CommonModule, ReactiveFormsModule,  FormsModule, RouterModule],
   templateUrl: './employerregister.component.html',
   styleUrls: ['./employerregister.component.css']
 })
+
+
 export class EmployerregisterComponent implements OnInit {
   signupForm: FormGroup;
   backendErrors: { [key: string]: string[] } | null = null;

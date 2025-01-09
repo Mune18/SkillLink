@@ -3,12 +3,12 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [ FormsModule, ReactiveFormsModule, CommonModule , RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -54,7 +54,7 @@ export class LoginComponent {
         error: (error) => {
           console.error('Login failed:', error);
           if (error.status === 422) {
-            this.backendErrors = error.error.errors; // Validation errors
+            this.backendErrors = error.error.general[0].error; // Validation errors
           } else if (error.error && error.error.error) {
             // Handle general errors like "Invalid credentials"
             this.backendErrors = { general: [error.error.error] };

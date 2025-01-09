@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post-modal',
@@ -22,28 +23,29 @@ import { Router } from '@angular/router';
     MatSelectModule,
     MatIconModule,
     MatDialogModule,
-    FormsModule, // Import FormsModule for ngModel
-    ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
 })
 export class PostModalComponent implements OnInit {
   userData: any = {};
   postForm: FormGroup;
+  selectedFile: File | null = null; // For storing the selected image file
 
-  postTo: string = ''; // To store the value selected in mat-select
-  desc: string = ''; // To store the content entered in textarea
-
-  constructor(private dialogRef: MatDialogRef<PostModalComponent>,  private fb: FormBuilder,private authService: AuthService,private router: Router) {
+  constructor(
+    private dialogRef: MatDialogRef<PostModalComponent>,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.postForm = this.fb.group({
-      title: ['', Validators.required],
-      desc: ['', Validators.required],
-      image: [''],
+      title: ['', [Validators.required, Validators.minLength(15)]], // At least 5 characters for the title
+      desc: ['', [Validators.required, Validators.minLength(30)]], // At least 10 characters for the description
     });
   }
 
-
   ngOnInit(): void {
-    // const userId = this.getLoggedInUserId();
     this.fetchUserData();
   }
 
@@ -54,8 +56,6 @@ export class PostModalComponent implements OnInit {
         next: (response) => {
           this.userData = response.user;
           console.log('User data fetched successfully:', response);
-          console.log("my data:", this.userData)
-          // this.userProfileImage = `${this.authService.apiUrl}${this.userData.profile_image}`;
         },
         error: (error) => {
           console.error('Failed to fetch user data:', error);
@@ -70,39 +70,40 @@ export class PostModalComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.selectedFile = input.files[0];
+    }
+  }
 
   submitPost(): void {
     if (this.postForm.valid) {
-      const postData = {
-        ...this.postForm.value,
-        user_id: this.userData.id,
-        created_at: new Date(),
-        likes_count: 0,
-        comments_count: 0
-      };
+      const formData = new FormData();
+      formData.append('title', this.postForm.get('title')?.value);
+      formData.append('desc', this.postForm.get('desc')?.value);
+      formData.append('user_id', this.userData.id);
+      formData.append('created_at', new Date().toISOString());
+      formData.append('likes_count', '0');
+      formData.append('comments_count', '0');
 
-      this.authService.createForum(postData).subscribe({
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+
+      this.authService.createForum(formData).subscribe({
         next: (response) => {
           console.log('Post created successfully:', response);
           this.dialogRef.close(response);
         },
         error: (error) => {
           console.error('Error creating post:', error);
-        }
+        },
       });
     }
   }
 
-  close(): void {
-    this.dialogRef.close(); // Close the modal
-  }
-
-
-
-  // Implement the methods referenced in the template
   closeDialog(): void {
-    this.dialogRef.close(); // Close the modal
+    this.dialogRef.close();
   }
-
-
 }

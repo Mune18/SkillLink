@@ -6,15 +6,20 @@ import { InternregisterComponent } from './internregister/internregister.compone
 import { EmployerregisterComponent } from './employerregister/employerregister.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { CommentComponent } from './comment/comment.component';
+import { VisitComponent } from './visit/visit.component';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'posts', component: MypostsComponent },
-    { path: 'intern', component: InternregisterComponent },
-    { path: 'employer', component: EmployerregisterComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'userprofile', component: UserprofileComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  { path: 'login', title: 'SkillLink', component: LoginComponent },
+  { path: 'home', title: 'Home | SkillLink', component: HomeComponent },
+  { path: 'posts', title: 'My Posts | SkillLink', component: MypostsComponent },
+  { path: 'intern', title: 'Intern | SkillLink', component: InternregisterComponent },
+  { path: 'employer', title: 'Recruiter | SkillLink', component: EmployerregisterComponent },
+  { path: 'profile', title: 'Profile | SkillLink', component: ProfileComponent },
+  { path: 'userprofile', title: 'User Profile | SkillLink', component: UserprofileComponent },
+  {path: 'comments', title: 'Home | SkillLink', component: CommentComponent},
+  {path: 'visit', title: 'Profile | SkillLink', component: VisitComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
+

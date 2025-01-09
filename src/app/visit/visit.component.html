@@ -1,0 +1,147 @@
+<header class="header">
+  <div class="logo">
+    <img routerLink="/home" src="skill-high-resolution-logo.png" alt="Logo" width="120px" height="auto">
+  </div>
+  <!-- <nav class="nav">
+    <a routerLink="/home">Home</a>
+    <a href="/posts">My Posts</a>
+  </nav> -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search" class="search-input" />
+    <button class="search-button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div class="profile" (click)="toggleDropdown()" [class.active]="isDropdownOpen">
+    <span>{{userData.fullname}}</span>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+    <div class="dropdown-menu" *ngIf="isDropdownOpen">
+      <ul>
+        <li (click)="goToProfile()"><mat-icon>person</mat-icon>Profile</li>
+        <li (click)="Logout()"><mat-icon>logout</mat-icon>Log Out</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<body>
+  <!-- Profile Section -->
+  <div class="profile-card modern-card">
+
+      <img class="profile-header" [src]="userRoleData.cover_image || 'https://i.pinimg.com/736x/0d/d0/bb/0dd0bbbc6c38a555d0817e8051ef2b12.jpg'" alt="">
+
+    <div class="profile-body">
+      <div class="edit-icon">
+        <mat-icon>edit</mat-icon>
+      </div>
+      <div >
+        <img class="profile-image" [src]="userData.profile_image" alt="">
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">
+          <h2>{{userData.fullname}}</h2>
+          <p>{{userData.role | titlecase}}</p>
+        </div>
+        <p>{{userData.address}}</p>
+        <a href="#" class="contact-link">{{userData.phone_number}}</a>
+      </div>
+      <div class="profile-role">
+        <p>Student at Gordon College, Olongapo City</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Me Section -->
+  <div class="modern-card about-section">
+    <div class="edit-icon">
+      <mat-icon>edit</mat-icon>
+    </div>
+    <h3>About me</h3>
+    <p>{{ userRoleData?.about || "You haven't input anything yet 🤣" }}</p>
+
+  </div>
+
+  <!-- Activity Section -->
+  <div class="modern-card activity-section">
+      <button class="create-post-btn">
+        Create Post
+      </button>
+      <div class="edit-icon">
+        <mat-icon>edit</mat-icon>
+      </div>
+    <h3>Activity</h3>
+    <!-- <h5>14,113 followers</h5> -->
+    <div class="activity-tabs">
+      <button class="tab active">Posts</button>
+       <button class="tab">Comments</button>
+      <button class="tab">Images</button>
+    </div>
+
+    <div class="activity-posts">
+      <!-- Post 1 -->
+      <div class="post" *ngFor="let forum of displayedForums">
+        <p class="post-title">
+          {{ forum.title }}
+        </p>
+        @if (forum.image) {
+          <img class="forum-image" [src]="forum.image" alt="">
+        }@else{
+          <p class="post-text">
+          </p>
+        }
+        <p class="post-text">
+          {{ forum.desc }}
+        </p>
+        <div class="post-footer">
+          <div class="reaction-icons">
+            <mat-icon>arrow_upward</mat-icon>
+            <span>{{forum.likes_count}}</span>
+          </div>
+          <!-- Image with a fixed size -->
+          <span class="comments-count" (click)="commentPost(forum.id, forum, userData)">{{forum.comments_count}} comments</span>
+        </div>
+      </div>
+
+
+      <button class="tab" *ngIf="forums.length > 3 " (click)="toggleShowAll()">
+      {{ showAll ? 'Show fewer posts' : 'Show all posts' }}
+    </button>
+
+
+  </div>
+
+  <!-- Skills Section -->
+  <div class="modern-card skills-section">
+    <div class="edit-icon">
+      <mat-icon>edit</mat-icon>
+    </div>
+    <h3>Skills</h3>
+    <ul>
+      <li>Full-Stack Development</li>
+      <li>Web development</li>
+      <li>UI/UX Design</li>
+    </ul>
+  </div>
+
+  <!-- Education Section -->
+  <div class="modern-card education-section">
+    <div class="edit-icon">
+      <mat-icon>edit</mat-icon>
+    </div>
+    <h3>Education</h3>
+    <p><strong>{{userRoleData.school}}</strong></p>
+    <p>{{userRoleData.degree}}</p>
+  </div>
+
+  <!-- Experience Section -->
+  <div class="modern-card experience-section">
+    <div class="edit-icon">
+      <mat-icon>edit</mat-icon>
+    </div>
+    <h3>Experience</h3>
+    <p><strong>Management Information System Intern</strong></p>
+    <p>IDESS Maritime Centre (Subic) Inc.</p>
+    <p>Jul 2023 - Jul 2023</p>
+    <p>Subic Central Luzon, Philippines</p>
+  </div>
+

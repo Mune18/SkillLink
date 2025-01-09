@@ -1,0 +1,438 @@
+/* Header Styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 15px 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 96%;
+  z-index: 1000;
+}
+
+.forum-image {
+  width: 100%;  /* Adjust width as per your needs */
+  height: 100%;  /* Adjust height as per your needs */
+  object-fit: cover;  /* Ensures the image scales without distorting */
+  border-radius: 8px;  /* Optional: Adds rounded corners */
+}
+
+.post-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: auto;
+  margin-right: 10px;
+}
+
+.nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #0073b1;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 30px;
+  padding: 5px 15px;
+  margin-right: 45vh;
+  margin-left: 30vh;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  width: 350px;
+  font-size: 14px;
+  background-color: transparent;
+  margin-left: 10px;
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.search-button mat-icon {
+  color: #0073b1;
+}
+
+/* Profile Section */
+.profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile span {
+  font-size: 14px;
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.profile > mat-icon {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.profile:hover > mat-icon {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 200px;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f2f5;
+}
+
+.dropdown-menu mat-icon {
+  color: #0073b1;
+}
+
+/* Show dropdown when active */
+.profile.active .dropdown-menu {
+  display: block;
+}
+
+/* General Styles */
+body {
+font-family: 'Poppins', sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f4f6f8;
+color: #333;
+line-height: 1.6;
+margin-bottom: -19px;
+}
+
+h3 {
+font-size: 22px;
+margin-bottom: 15px;
+font-weight: 600;
+color: #444;
+}
+
+p {
+margin: 5px 0;
+font-size: 14px;
+color: #666;
+}
+
+/* Modern Card Design */
+.modern-card {
+position: relative;
+width: 90%;
+max-width: 800px;
+margin: 20px auto;
+padding: 20px 30px;
+background: #ffffff;
+border-radius: 12px;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.modern-card:hover {
+box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+transform: translateY(-5px);
+}
+
+/* Profile Card */
+.profile-card {
+padding: 0;
+overflow: hidden;
+}
+
+.profile-header {
+width: 100%;
+height: auto;
+background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+.profile-body {
+display: flex;
+align-items: center;
+padding: 20px 30px;
+position: relative;
+}
+
+.profile-image {
+width: 120px;
+height: 120px;
+background-color: #ddd;
+border: 5px solid #fff;
+border-radius: 50%;
+position: absolute;
+top: -60px;
+}
+
+.profile-info {
+margin-top: 50px;
+}
+
+.profile-info h2 {
+font-size: 24px;
+margin: 5px 0;
+color: #333;
+font-weight: 700;
+}
+
+.profile-info p {
+font-size: 14px;
+color: #777;
+}
+
+.contact-link {
+display: inline-block;
+text-decoration: none;
+font-weight: 600;
+color: #0073b1;
+transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+color: #005580;
+}
+
+.profile-role {
+font-size: 14px;
+color: #555;
+font-weight: 600;
+margin-left: auto;
+}
+
+/* About, Skills, Education, Experience */
+.skills-section ul {
+list-style: none;
+padding: 0;
+}
+
+.skills-section li {
+font-size: 15px;
+font-weight: 500;
+margin: 8px 0;
+color: #444;
+border-bottom: 1px solid #eee;
+padding-bottom: 5px;
+transition: color 0.3s ease;
+}
+
+.skills-section li:hover {
+color: #6a11cb;
+}
+
+.education-section p strong,
+.experience-section p strong {
+font-size: 16px;
+font-weight: 600;
+color: #444;
+}
+
+.education-section p,
+.experience-section p {
+margin-bottom: 8px;
+font-size: 14px;
+color: #666;
+}
+
+.edit-icon {
+position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-icon mat-icon {
+font-size: 18px;
+  padding-inline-start: 8px;
+  padding-top: 6px;
+  color: #6a11cb;
+}
+
+.edit-icon:hover {
+background-color: #f0f0f0;
+}
+
+.activity-section h5 {
+font-size: 13px;
+margin-bottom: 10px;
+margin-top: -15px;
+color: rgb(28, 126, 255);
+}
+
+/* Activity Section Styles */
+.activity-section h5 {
+font-size: 14px;
+color: #555;
+margin-bottom: 15px;
+}
+
+.activity-tabs {
+display: flex;
+gap: 10px;
+margin-bottom: 20px;
+}
+
+.tab {
+background-color: #f2f2f2;
+border: none;
+padding: 8px 15px;
+border-radius: 20px;
+font-size: 13px;
+color: #333;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.tab.active,
+.tab:hover {
+background-color: #0073b1;
+color: #fff;
+}
+
+.activity-posts {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.post {
+border-bottom: 1px solid #e6e6e6;
+padding-bottom: 10px;
+}
+
+.post-text {
+font-size: 14px;
+color: #333;
+margin: 0;
+}
+
+.post-footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 13px;
+color: #666;
+}
+
+.reaction-icons {
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
+.reaction-icons mat-icon {
+font-size: 16px;
+color: #0073b1;
+}
+
+.comments-count {
+color: #0073b1;
+cursor: pointer;
+}
+
+.show-all-btn {
+background: none;
+border: none;
+color: #0073b1;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+margin-top: 10px;
+}
+
+/* Create Post Button Styling */
+.create-post-btn {
+position: absolute;
+align-content: center;
+top: 12px;
+right: 80px;
+background-color: #0073b1;
+color: #fff;
+border: none;
+padding: 10px;
+border-radius: 5px;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.create-post-btn mat-icon {
+font-size: 18px;
+}
+
+.create-post-btn:hover {
+background-color: #005f8d;
+}
+
+.edit-icon {
+position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: 0px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+

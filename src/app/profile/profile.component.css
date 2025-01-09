@@ -13,7 +13,21 @@
     z-index: 1000;
   }
 
+  .forum-image {
+    width: 100%;  /* Adjust width as per your needs */
+    height: 100%;  /* Adjust height as per your needs */
+    object-fit: cover;  /* Ensures the image scales without distorting */
+    border-radius: 8px;  /* Optional: Adds rounded corners */
+  }
+
+  .post-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+
   .logo {
+    cursor: pointer;
     display: flex;
     align-items: center;
   }
@@ -180,7 +194,8 @@ p {
 }
 
 .profile-header {
-  height: 150px;
+  width: 100%;
+  height: auto;
   background: linear-gradient(135deg, #6a11cb, #2575fc);
 }
 
